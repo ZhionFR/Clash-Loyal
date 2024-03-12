@@ -50,6 +50,12 @@
 			<Add library="libSDL2" />
 			<Add directory="SDL2/x86_64-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="List.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="List.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="clashloyal.c">
 			<Option compilerVar="CC" />
 		</Unit>
