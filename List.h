@@ -15,7 +15,7 @@ typedef T_Cell *T_List;
 /********** Basic functions *************/
 
 void initList(T_List *l);
-bool emptyList( T_List l);
+bool isEmptyList( T_List l);
 
 /********** Functions on the pointers *************/
 
