@@ -3,17 +3,47 @@
 #include "list.h"
 
 
+/********** Basic functions *************/
 
-////////////////////////////    Step 1    ////////////////////////////
-
-
-void initListe(T_liste *l){
+// For initializing
+void initList(T_liste *l){
     *l=NULL;
 }
 
-bool listeVide(T_liste l){
+bool emptyList(T_liste l){
     return (l==NULL);
 };
+
+/********** Action on the pointers *************/
+
+T_liste getptrFirstCell(T_liste l){
+    while (l->prec != NULL)
+        l = l->prec;
+    return l;
+}
+
+T_liste getptrLastCell(T_liste l){
+    while (l->suiv != NULL)
+        l = l->suiv;
+    return l;
+}
+
+T_liste getptrNextCell(T_liste l){
+    return l->suiv;
+}
+
+T_liste getptrPrevCell(T_liste l){
+    return l->prec;
+}
+
+int* getPtrData(T_liste l){
+    if (l!=NULL) return l->suiv;
+    printf("ERROR === getPtrData : List empty.\n");
+    return NULL;
+}
+
+/********** Others *************/
+
 
 void afficheListeV1(T_liste l){
     printf("\n< ");
@@ -135,30 +165,6 @@ T_liste suppEnN(T_liste l, int pos){
     free(temp);
     *temp = *(*temp).suiv;
     return l;
-}
-
-T_liste getptrFirstCell(T_liste l){
-    while (l->prec != NULL) l = l->prec;
-    return l;
-}
-
-T_liste getptrLastCell(T_liste l){
-    while (l->suiv != NULL) l = l->suiv;
-    return l;
-}
-
-T_liste getptrNextCell(T_liste l){
-    return l->suiv;
-}
-
-T_liste getptrPrevCell(T_liste l){
-    return l->prec;
-}
-
-int* getPtrData(T_liste l){
-    if (l!=NULL) return l->suiv;
-    printf("ERROR === getPtrData : List empty.\n");
-    return NULL;
 }
 
 

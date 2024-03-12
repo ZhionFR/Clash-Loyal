@@ -12,9 +12,12 @@ typedef struct T_cell{
 } T_cellule;
 typedef T_cellule *T_liste;
 
-void initListe(T_liste *l);
-bool listeVide( T_liste l);
+/********** Basic functions *************/
 
+void initList(T_liste *l);
+bool emptyList( T_liste l);
+
+/********** Action on the pointers *************/
 
 
 void afficheListeV1( T_liste l);
