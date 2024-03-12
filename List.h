@@ -5,63 +5,65 @@
 
 ////////////////////////////    Step 1    ////////////////////////////
 
-typedef struct T_cell{
-    struct T_cell *suiv;
-    struct T_cell *prec;
-    int *pdata;              //attention à faire un malloc sur ce champ avant de s'en servir
-} T_cellule;
-typedef T_cellule *T_liste;
+typedef struct T_Cell{
+    struct T_Cell *next;
+    struct T_Cell *prev;
+    int *pdata;              // Be careful to do a malloc before using this
+} T_Cell;
+typedef T_Cell *T_List;
 
-void initListe(T_liste *l);
-bool listeVide( T_liste l);
+/********** Basic functions *************/
 
+void initList(T_List *l);
+bool emptyList( T_List l);
 
+/********** Functions on the pointers *************/
 
-void afficheListeV1( T_liste l);
+T_List getNextCell(T_List l);
+T_List getPrevCell(T_List l);
+T_List getFirstCell(T_List l);
+T_List getLastCell(T_List l);
+
+void displayListV1( T_List l);
 //Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de données
 //Utile pour afficher et debuguer les fonctions ci-dessous
 
-T_liste ajoutEnTete(T_liste l, int mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
-T_liste ajoutEnFin(T_liste l, int mydata);
-T_liste ajoutEnN(T_liste l, int pos, int mydata);
+T_List addFirst(T_List l, int mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
+T_List addLast(T_List l, int mydata);
+T_List addAtN(T_List l, int pos, int mydata);
 
-T_liste suppEnTete(T_liste l);
-T_liste suppEnFin(T_liste l);
-T_liste suppEnN(T_liste l, int pos);
+T_List delFirst(T_List l);
+T_List delLast(T_List l);
+T_List delAtN(T_List l, int pos);
 
-T_liste getptrFirstCell(T_liste l);
-T_liste getptrLastCell(T_liste l);
-T_liste getptrNextCell(T_liste l);
-T_liste getptrPrevCell(T_liste l);
+int* getData(T_List l);
+int* getIfData(T_List l, int mydata);
+void swapData( T_List source, T_List destination );
 
-int* getPtrData(T_liste l);
-int* getPtrIfData(T_liste l, int mydata);
-void swapPtrData( T_liste source, T_liste destination );
+int getNbCell(T_List l);
+int getSizeBytes(T_List l);
 
-int getNbreCell(T_liste l);
-int getSizeBytes(T_liste l);
+T_List creatNewListFromFusion(T_List l1, T_List l2);
+T_List addBehind(T_List debut, T_List suite);
 
-T_liste creatNewListeFromFusion(T_liste l1, T_liste l2);
-T_liste addBehind(T_liste debut, T_liste suite);
-
-T_liste findCell(T_liste l, int data);
-int getOccurences(T_liste l, int data);
+T_List findCell(T_List l, int data);
+int getOccurences(T_List l, int data);
 
 
-void afficheListeV2( T_liste l);
+void displayListV2( T_List l);
 
 ////////////////////////////    Step 2    ////////////////////////////
 // Utils
-void affichetab(int* tab, int size);
+void displayTab(int* tab, int size);
 
 
-void tri_selection(int* tab, int n);
+void selectionSort(int* tab, int n);
 
 //Q1
-T_liste genlist(int size);
+T_List genList(int size);
 
 //Q2
-int* list_to_tab(T_liste list,  int size);
+int* listToTab(T_List list,  int size);
 
 
 #endif // LISTEDOUBLE_H_INCLUDED
