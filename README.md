@@ -3,7 +3,7 @@
 ### Attack phase
  - [ ] bool kingtowerdestroyed(TlistePlayer player)
  - [ ] TListePlayer quiEstAPortee(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
-   - [ ](NR) sort by AtkSpeed
+   - [ ] (NR) sort by AtkSpeed
  - [ ] TListePlayer combat(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
  - [ ] Void supprimerUnite(TListePlayer *player, Tunite *UniteDetruite);
 
