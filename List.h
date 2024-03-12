@@ -15,7 +15,9 @@ typedef T_Cell *T_List;
 /********** Basic functions *************/
 
 void initList(T_List *l);
+
 bool isEmptyList(T_List l);
+
 
 /********** Functions on the pointers *************/
 
@@ -26,12 +28,12 @@ T_List getLastCell(T_List l);
 int* getData(T_List l);
 int* getIfData(T_List l, int mydata);
 void swapData( T_List source, T_List destination );
-//Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de données
+//Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de donnÃ©es
 //Utile pour afficher et debuguer les fonctions ci-dessous
 
 /********** Add/Remove in List *************/
 
-T_List addFirst(T_List l, int mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
+T_List addFirst(T_List l, int mydata); //Bien mettre Ã  NULL les champs suiv et prec non utilisÃ©s s'il y en a
 T_List addLast(T_List l, int mydata);
 T_List addAtN(T_List l, int pos, int mydata);
 
