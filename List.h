@@ -29,6 +29,8 @@ void swapData( T_List source, T_List destination );
 //Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de données
 //Utile pour afficher et debuguer les fonctions ci-dessous
 
+/********** Add/Remove in List *************/
+
 T_List addFirst(T_List l, int mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
 T_List addLast(T_List l, int mydata);
 T_List addAtN(T_List l, int pos, int mydata);
@@ -36,6 +38,8 @@ T_List addAtN(T_List l, int pos, int mydata);
 T_List delFirst(T_List l);
 T_List delLast(T_List l);
 T_List delAtN(T_List l, int pos);
+
+/********** Others *************/
 
 int getNbCell(T_List l);
 int getSizeBytes(T_List l);

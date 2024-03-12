@@ -60,8 +60,7 @@ void swapData(T_List source, T_List destination ){
     destination->pdata = temp;
 }
 
-/********** Printing Functions *************/
-
+/********** Add/Remove in List *************/
 
 T_List addFirst(T_List l, int mydata){
     int* data = (int*)malloc(sizeof(int));
@@ -152,7 +151,7 @@ T_List delLast(T_List l){
         temp = getNextCell(temp);
     free(getData(getNextCell(temp)));
     free(getNextCell(temp));
-    initList(temp->next);
+    temp->next = NULL;
     return l;
 }
 
@@ -179,6 +178,8 @@ T_List delAtN(T_List l, int pos){
     *temp = *(*temp).next; // TBD demander si possible de modif
     return l;
 }
+
+/********** Others *************/
 
 int getNbCell(T_List l){
     if (isEmptyList(l))
@@ -238,6 +239,8 @@ int getOccurences(T_List l, int data){
     return n;
 }
 
+/********** Printing Functions *************/
+
 void displayListV1(T_List l){
     printf("\n< ");
     while(!isEmptyList(l)){
@@ -263,7 +266,7 @@ void displayListV2( T_List l){
 #include <time.h>
 
 // STARTUtils
-void affichetab(int* tab, int size){
+void displaytab(int* tab, int size){
     int i;
     printf("\n[");
     if (size>=1) printf("%i", tab[0]);
@@ -276,7 +279,7 @@ void affichetab(int* tab, int size){
 
 // ENDUtils
 
-void tri_selection(int* tab, int size){
+void selecti(int* tab, int size){
     int i, j, min, temp;
 
     for (i=0; i<size-1; i++){
