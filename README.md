@@ -8,7 +8,7 @@
  - [ ] Void supprimerUnite(TListePlayer *player, Tunite *UniteDetruite);
 
 ### Move phase
- - [ ] void MoveAll(???);
+ - [ ] void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu);
 
 ### Create Phase
  - [ ] Tunite AcheteUnite(int *elixirEnStockduJoueur);
