@@ -1,437 +1,319 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include "list.h"
 
-#include "List.h"
 
-// Create an empty list
-void initList(T_List *l){ // No malloc, just initialize at NULL the pointer
+
+////////////////////////////    Step 1    ////////////////////////////
+
+
+void initListe(T_liste *l){
     *l=NULL;
 }
 
-// Check if the list is empty
-bool isEmptyList(T_List l){ // Check if a list is empty
+bool listeVide(T_liste l){
     return (l==NULL);
+};
+
+void afficheListeV1(T_liste l){
+    printf("\n< ");
+    while(l != NULL){
+        printf("%d, ",(*(*l).pdata));
+        l = l->suiv;
+    }
+    printf(">\n");
 }
 
-// Display the list ( [1;2;3;...] )
-void displayListV1(T_List l){
-    T_List current = l;
-    printf("[");
-    while(!isEmptyList(current)){
-        printf("%d",*(current->pdata));
-        if(!isEmptyList(current->next)){
-            printf(";");
-        }
-        current = current->next;
-    }
-    printf("]\n");
+T_liste ajoutEnTete(T_liste l, int mydata){
+    int* data = (int*)malloc(sizeof(int));
+    struct T_cell* nouv = (struct T_cell*)malloc(sizeof(struct T_cell));
+    *data = mydata;
+    nouv->prec = NULL;
+    nouv->pdata = data;
+    nouv->suiv = l;
+    if(l == NULL) return nouv;
+    l->prec = nouv;
+    return nouv;
 }
 
-// Add an element to the head of a list
-T_List addAtHead(T_List l, int mydata){
-    T_List new = (T_List)malloc(sizeof(T_List));
-    new->pdata = (int*)malloc(sizeof(int));
-    *(new->pdata)=mydata; // Modify the content at the pointer's adress
-    if (isEmptyList(l)) // Creat first cell of the list
-    {
-        initList(&new->next);
-        initList(&new->prev);
-    }
-    else // List not empty, so need to make the connections
-{
-        new->next = l;
-        initList(&new->prev);
-        l->prev = new;
-    }
-    return new;
-}
-
-// Add an element to the end of a list
-T_List addAtEnd(T_List l, int mydata){
-    T_List new = (T_List)malloc(sizeof(T_Cell));
-    if (isEmptyList(new)){
-        printf("ERROR - addAtEnd : Memory allocation failed (Code : 1)");
-        exit(EXIT_FAILURE);
-    }
-    new->pdata = (int*)malloc(sizeof(int));
-    if (new->pdata == NULL){
-        printf("ERROR - addAtEnd : Memory allocation failed (Code : 2)\n");
-        free(new); // Free the allocated node
-        exit(EXIT_FAILURE);
-    }
-    *(new->pdata)=mydata; // Modify the content at the pointer's adress
-    initList(&new->next);
-    if (isEmptyList(l)){ // Creat first cell of the list
-        initList(&new->prev);
-        return new;
-    }
-    else{ // List not empty, so need to make the connections
-        T_List current=l;
-        while(!isEmptyList(current->next)){
-            current = current->next;
-        }
-        new->prev = current;
-        current->next = new;
-    }
+T_liste ajoutEnFin(T_liste l, int mydata){
+    int* data = (int*)malloc(sizeof(int));
+    struct T_cell* nouv = (struct T_cell*)malloc(sizeof(struct T_cell));
+    *data = mydata;
+    nouv->prec = NULL;
+    nouv->pdata = data;
+    nouv->suiv = NULL;
+    if (l == NULL) return nouv;
+    T_liste temp = l;
+    while (temp->suiv != NULL) temp = temp->suiv;
+    temp->suiv = nouv;
+    nouv->prec = temp;
     return l;
 }
 
-// Add an element at the position N in a list
-T_List addAtN(T_List l, int pos, int mydata) {
-    T_List new = (T_List)malloc(sizeof(T_List));
-    new->pdata = (int*)malloc(sizeof(int));
-    *(new->pdata) = mydata;
-    T_List current = l;
-    int i = 0;
-    if (isEmptyList(l)){
-        if (pos == 0){
-            return addAtHead(l, mydata); // Add to the beginning if pos = 0
-        }
-        else {
-            printf("addAtN: WARNING - Empty list but position > 0 (Adding First)\n");
-            return addAtHead(l, mydata); // Return unchanged list
-        }
+T_liste ajoutEnN(T_liste l, int pos, int mydata){
+    if (l == NULL && pos > 0) {
+        printf("WARNING === ajoutEnN:Non zero Index in NULL List (adding first)\n");
+        return ajoutEnTete(l, mydata);
     }
-    while (!isEmptyList(current) && pos > i) { // List Traversal
-        i++;
-        current = current->next;
+    if (pos == 0) {
+        return ajoutEnTete(l, mydata);
     }
-    if (isEmptyList(current) && pos > i) { // If position is out of bounds
-        printf("addAtN: WARNING - Position out of bounds (Adding Last)\n");
-        return addAtEnd(l, mydata); // Return unchanged list
-    }
-    T_List prev;
-    if (!isEmptyList(current)){
-        prev = current->prev;
-    } else {
-        prev = l;
-    }
-    if (pos == 0) { // Add to the beginning
-        return addAtHead(l, mydata);
-    }
-    else {
-        if (isEmptyList(current)){ // Add to the end
-            return addAtEnd(l, mydata);
-        }
-        else { // Add at the specified position
-            new->next = current;
-            new->prev = prev;
-            current->prev = new;
-            if (!isEmptyList(prev)) {
-                prev->next = new;
-            }
-            return l;
-        }
-    }
-}
-
-T_List delAtHead(T_List l){
-    if (isEmptyList(l)){
-        printf("delAtHead : ERROR - Empty List (Return NULL)");
-        return NULL;
-    }
-    if (isEmptyList(l->next)){ // If l is the only element in the list
-        free(l->pdata);
-        free(l);
-        return NULL; // List becomes empty after deletion
-    }
-    else{
-        T_List temp = l->next;
-        initList(&temp->prev);
-        free(l->pdata);
-        free(l);
-        return temp;
-    }
-}
-
-T_List delAtEnd(T_List l){
-    if (isEmptyList(l)){
-        printf("delAtEnd: ERROR - Empty List (Return NULL)\n");
-        return NULL;
-    }
-    if (isEmptyList(l->next)){ // If l is the only element in the list
-        free(l->pdata);
-        free(l);
-        return NULL; // List becomes empty after deletion
-    }
-    // List traversal
-    T_List previous, temp = l;
-    initList(&previous);
-    while (!isEmptyList(temp->next)){
-        previous = temp;
-        temp = temp->next;
-    }
-    if (!isEmptyList(previous)) {
-        initList(&previous->next);
-    } else {
-        // If previous is NULL, it means l is the only element in the list
-        free(l->pdata);
-        free(l);
-        return NULL; // List becomes empty after deletion
-    }
-    free(temp->pdata);
-    free(temp);
-    return l;
-}
-
-T_List delAtN(T_List l, int pos){
-    if (isEmptyList(l)){
-        printf("delAtN: ERROR - Empty List (Return NULL)\n");
-        return NULL;
-    }
-    if (pos == 0){// If position is 0, delete the head
-        T_List temp = l->next;
-        if (!isEmptyList(temp))
-            initList(&temp->prev);
-        free(l->pdata);
-        free(l);
-        return temp;
-    }
-    // List traversal
-    T_List current = l;
+    int* data = (int*)malloc(sizeof(int));
+    struct T_cell* nouv = (struct T_cell*)malloc(sizeof(struct T_cell));
+    *data = mydata;
+    nouv->prec = NULL;
+    nouv->pdata = data;
+    nouv->suiv = NULL;
+    T_liste temp = l;
     int index = 0;
-    while (!isEmptyList(current) && index < pos - 1){
-        current = current->next;
+    while (temp->suiv != NULL && index < pos - 1){
+        temp = temp->suiv;
         index++;
     }
-    if (isEmptyList(current) || isEmptyList(current->next)){// If position > len or pos < 0 error && return
-        printf("delAtN: ERROR - Position out of bounds (Deleting last)\n");
-        return delAtEnd(l);
+    if (index < pos - 1) {
+        printf("WARNING === ajoutEnN:Index out of Bounds (adding last)\n");
+        return ajoutEnFin(l, mydata);
     }
-    T_List temp = current->next;
-    current->next = temp->next;
-    if (!isEmptyList(temp->next))
-        temp->next->prev = current;
+    nouv->suiv = temp->suiv;
+    if (temp->suiv != NULL) {
+        temp->suiv->prec = nouv;
+    }
+    temp->suiv = nouv;
+    nouv->prec = temp;
+    return l;
+}
+
+T_liste suppEnTete(T_liste l){
+    if (l==NULL){
+        printf("WARNING === suppEnTete:List already empty.\n");
+        return NULL;
+    }
+    T_liste nouv = l->suiv;
+    free(l->pdata);
+    free(l);
+    return nouv;
+}
+
+T_liste suppEnFin(T_liste l){
+    if (l == NULL){
+        printf("WARNING === suppEnFin:List already empty.\n");
+        return NULL;
+    }
+    if (l->suiv == NULL){
+        free(l->pdata);
+        free(l);
+        return NULL;
+    }
+    T_liste temp = l;
+    while (temp->suiv->suiv != NULL) temp = temp->suiv;
+    free(temp->suiv->pdata);
+    free(temp->suiv);
+    temp->suiv = NULL;
+    return l;
+}
+
+T_liste suppEnN(T_liste l, int pos){
+    if (l == NULL && pos > 0) {
+        printf("WARNING === suppEnN:Non zero Index in NULL List (deleting first)\n");
+        return NULL;
+    }
+    if (pos == 0) {
+        return suppEnTete(l);
+    }
+    T_liste temp = l;
+    int index = 0;
+    while (temp->suiv != NULL && index < pos){
+        temp = temp->suiv;
+        index++;
+    }
+    if (index < pos) {
+        printf("WARNING === suppEnN:Index out of Bounds (deleting last)\n");
+        return suppEnFin(l);
+    }
     free(temp->pdata);
     free(temp);
+    *temp = *(*temp).suiv;
     return l;
 }
 
-T_List getptrFirstCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrFirstCell - WARNING Empty List (Return NULL)");
-        return NULL;
-    }
-    while (!isEmptyList(l->prev)){
-        l = l->prev;
-    }
+T_liste getptrFirstCell(T_liste l){
+    while (l->prec != NULL) l = l->prec;
     return l;
 }
 
-T_List getptrLastCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrLastCell - WARNING Empty List (Return NULL)");
-        return NULL;
-    }
-    while (!isEmptyList(l->next)){
-        l = l->next;
-    }
+T_liste getptrLastCell(T_liste l){
+    while (l->suiv != NULL) l = l->suiv;
     return l;
 }
 
-T_List getptrNextCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrNextCell: ERROR - No next cell\n");
-        return NULL;
-    }
-    return l->next;
+T_liste getptrNextCell(T_liste l){
+    return l->suiv;
 }
 
-T_List getptrPrevCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrPrevCell: ERROR - No previous cell\n");
-        return NULL;
-    }
-    return l->prev;
+T_liste getptrPrevCell(T_liste l){
+    return l->prec;
 }
 
-int* getPtrData(T_List l){
-    return l->pdata;
+int* getPtrData(T_liste l){
+    if (l!=NULL) return l->suiv;
+    printf("ERROR === getPtrData : List empty.\n");
+    return NULL;
 }
 
-void swapPtrData(T_List source, T_List destination){
-    if (isEmptyList(source) || isEmptyList(destination)){
-        printf("swapPtrData: ERROR - One or both pointers are NULL\n");
-        exit(EXIT_FAILURE);
-    }
-    int *temp = source->pdata;
+
+int* getPtrIfData(T_liste l, int mydata){
+    l = getptrFirstCell(l);
+    do {
+        if (*(l->pdata) == mydata) return l->pdata;
+        l = l->suiv;
+    } while (l->suiv != NULL);
+    printf("ERROR === getPtrIfData : Data not in list.\n");
+    return NULL;
+}
+
+void swapPtrData( T_liste source, T_liste destination ){
+    int* temp = source->pdata;
     source->pdata = destination->pdata;
     destination->pdata = temp;
 }
 
-int getNbreCell(T_List l){
-    int count = 0;
-    while (!isEmptyList(l)){
-        count++;
-        l = l->next;
+int getNbreCell(T_liste l){
+    if (l==NULL) return 0;
+    l = getptrFirstCell(l);
+    int n = 1;
+    while(l->suiv!=NULL){
+        n++;
+        l = l->suiv;
     }
-    return count;
+    return n;
 }
 
-int getSizeBytes(T_List l){
-    int totalBytes = 0;
-    while (!isEmptyList(l)){
-        totalBytes += sizeof(T_List);
-        l = l->next;
-    }
-    return totalBytes;
+int getSizeBytes(T_liste l){
+    int n = getNbreCell(l);
+    n = n*sizeof(struct T_cell);
+    return n;
 }
 
-T_List creatNewListFromFusion(T_List l1, T_List l2){
-    T_List fusedList;// Initialize the new list
-    initList(&fusedList);
-    while (!isEmptyList(l1)){
-        fusedList = addAtEnd(fusedList, *(l1->pdata));
-        l1 = l1->next;
-    }
-    while (!isEmptyList(l2)){
-        fusedList = addAtEnd(fusedList, *(l2->pdata));
-        l2 = l2->next;
-    }
-    return fusedList;
+T_liste creatNewListeFromFusion(T_liste l1, T_liste l2){
+    struct T_cell* nouv = (struct T_cell*)malloc(sizeof(struct T_cell));
+    nouv = l1;
+    while(nouv->suiv!=NULL) nouv = nouv->suiv;
+    nouv->suiv = l2;
+    return nouv;
 }
 
-T_List addBehind(T_List first, T_List last){
-    if (isEmptyList(first)){
-        if (isEmptyList(last)){
-            printf("WARNING - addBehind : adding two NULL lists");
-        }
-        return last;
-    }
-    T_List temp = first;
-    while (!isEmptyList(temp->next)){
-        temp = temp->next;
-    }
-    temp->next = last;
-    if (!isEmptyList(last)){
-        last->prev = temp;
-    }
-    return first;
+T_liste addBehind(T_liste l1, T_liste l2){
+    if (l1 == NULL) return l2;
+    if (l2 == NULL) return l1;
+    T_liste lastCellL1 = getptrLastCell(l1);
+    lastCellL1->suiv = l2;
+    l2->prec = lastCellL1;
+    return getptrFirstCell(l2);
 }
 
-T_List findCell(T_List l, int data){
-    while (!isEmptyList(l)){
-        if (*(l->pdata) == data){
-            return l;
-        }
-        l = l->next;
-    }
+T_liste findCell(T_liste l, int data){
+    l = getptrFirstCell(l);
+    do {
+        if (*(l->pdata) == data) return l;
+        l = l->suiv;
+    } while (l->suiv != NULL);
+    printf("ERROR === getPtrData : Data not in list.\n");
     return NULL;
 }
 
-int getOccurences(T_List l, int data){
-    int count = 0;
-    while (!isEmptyList(l)){
-        if (*(l->pdata) == data){
-            count++;
-        }
-        l = l->next;
+int getOccurences(T_liste l, int data){
+    l = getptrFirstCell(l);
+    int n =0;
+    while (l !=NULL && l->suiv != NULL){
+        if (*(l->pdata) == data) n++;
+        l = l->suiv;
     }
-    return count;
+    return n;
 }
 
-void displayListV2(T_List l){
-    T_List current = l;
-    printf("[");
-    while(!isEmptyList(current)){
-        printf("%d",*(current->pdata));
-        if(!isEmptyList(current->next)){
-            printf(";");
+void afficheListeV2( T_liste l){
+    printf("\n< ");
+    if (l!=NULL){
+        printf("%i, ", (*(l->pdata)));
+        while(l->suiv!=NULL){
+            l = getptrNextCell(l);
+            printf("%i, ", (*(l->pdata)));
         }
-        current = getptrNextCell(current);
+    }
+    printf(">\n");
+}
+
+////////////////////////////    Step 2    ////////////////////////////
+#include <time.h>
+
+// STARTUtils
+void affichetab(int* tab, int size){
+    int i;
+    printf("\n[");
+    if (size>=1) printf("%i", tab[0]);
+    for(i=1;i<size;i++){
+        printf(", %i", tab[i]);
     }
     printf("]\n");
 }
 
-// Part 2
 
-void selectionSort(int *tab, int length){
-    int current, smaller, j, temp;
-    for (current = 0; current < length - 1; current++){
-        smaller = current;
-        for (j = current; j < length; j++)
-            if (tab[j] < tab[smaller])
-                smaller = j;
-        temp = tab[current];
-        tab[current] = tab[smaller];
-        tab[smaller] = temp;
+// ENDUtils
+
+void tri_selection(int* tab, int size){
+    int i, j, min, temp;
+
+    for (i=0; i<size-1; i++){
+        min = i;
+        for (j=i; j<size; j++)if (tab[j]<tab[min]) min = j;
+        temp = tab[i];
+        tab[i] = tab[min];
+        tab[min] = temp;
     }
 }
 
-T_List createRandomList(int n){
-    T_List newList;
-    initList(&newList);
-    int randomValue = rand()%100;
-    srand(time(NULL)); // Seed the random number generator
-    newList = (T_List)malloc(sizeof(T_List));
-    newList = addAtEnd(newList, randomValue);
-    newList->pdata = (int*)malloc(sizeof(int));
-    if (newList->pdata == NULL) {
-        printf("ERROR - createRandomList : Memory allocation failed\n");
-        free(newList);
-        exit(EXIT_FAILURE);
+// Question 1
+T_liste genlist(int size){
+    int i, n;
+    T_liste l = NULL;
+    for(i=0;i<size;i++){
+        srand(time(NULL));
+        n = rand()%100;
+        l = ajoutEnFin(l, n);
     }
-    *(newList->pdata) = randomValue;
-    initList(&newList->next);
-    initList(&newList->prev);
-    for (int i = 0; i < n; i++){
-        randomValue = rand()%100;
-        newList = addAtEnd(newList, randomValue);
-    }
-    return newList;
+    return l;
 }
 
-int* listToArray(T_List l, int *size) {
-    int listSize = getNbreCell(l);
-    if (listSize == 0) {
-        *size = 0;
-        return NULL;
+// Question 2
+int* list_to_tab(T_liste list,  int size){
+    int i = 0, *tab;
+    while(i<size && list!=NULL){
+        tab[i] = *(list->pdata);
+        list = suppEnTete(list);
     }
-    int *arr = (int*)malloc(listSize * sizeof(int));
-    if (arr == NULL) {
-        printf("ERROR - listToArray : Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-    int index = 0;
-    while (!isEmptyList(l)) {
-        arr[index] = *(l->pdata);
-        l = l->next;
-        index++;
-    }
-    *size = listSize;
-    return arr;
-}
-
-int* listToArrayWithMemoryFree(T_List *originalList, int *size){
-    int listSize = getNbreCell(*originalList);
-    if (listSize == 0){
-        *size = 0;
-        return NULL;
-    }
-    int *arr = (int*)malloc(listSize * sizeof(int));
-    if (arr == NULL){
-        printf("Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-    int index = 0;
-    T_List current = *originalList;
-    while (!isEmptyList(current)){
-        arr[index] = *(current->pdata);
-        T_List temp = current;
-        current = current->next;
-        free(temp->pdata);
-        free(temp);
-        index++;
-    }
-    *size = listSize;
-    *originalList = NULL;
-    return arr;
+    return tab;
 }
 
 
-//
-// Created by cejuba on 2/20/2024.
-//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

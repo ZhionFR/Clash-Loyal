@@ -1,58 +1,68 @@
-#ifndef LIST_H_INCLUDED
-#define LIST_H_INCLUDED
+#ifndef LISTEDOUBLE_H_INCLUDED
+#define LISTEDOUBLE_H_INCLUDED
 
 #include <stdbool.h>
 
-typedef struct T_Cell{
-    struct T_Cell *next;
-    struct T_Cell *prev;
-    int *pdata; //Careful to do a malloc on this field before using it
-} T_Cell;
-typedef T_Cell *T_List;
+////////////////////////////    Step 1    ////////////////////////////
 
-void initList(T_List *l);
-bool isEmptyList(T_List l);
+typedef struct T_cell{
+    struct T_cell *suiv;
+    struct T_cell *prec;
+    int *pdata;              //attention à faire un malloc sur ce champ avant de s'en servir
+} T_cellule;
+typedef T_cellule *T_liste;
 
-void displayListV1(T_List l);
-
-T_List addAtHead(T_List l, int mydata);
-T_List addAtEnd(T_List l, int mydata);
-T_List addAtN(T_List l, int pos, int mydata);
-
-T_List delAtHead(T_List l);
-T_List delAtEnd(T_List l);
-T_List delAtN(T_List l, int pos);
-
-T_List getptrFirstCell(T_List l);
-T_List getptrLastCell(T_List l);
-T_List getptrNextCell(T_List l);
-T_List getptrPrevCell(T_List l);
-
-int* getPtrData(T_List l);
-void swapPtrData( T_List source, T_List destination );
-
-int getNbrCell(T_List l);
-int getSizeBytes(T_List l);
-
-T_List creatNewListFromFusion(T_List l1, T_List l2);
-T_List addBehind(T_List start, T_List end);
-
-T_List findCell(T_List l, int data);
-int getOccurences(T_List l, int data);  // Number of time data is present in l1
-
-void displayListV2( T_List l);
+void initListe(T_liste *l);
+bool listeVide( T_liste l);
 
 
-// Part 2
 
-void selectionSort(int *tab, int length);
+void afficheListeV1( T_liste l);
+//Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de données
+//Utile pour afficher et debuguer les fonctions ci-dessous
 
-T_List createRandomList(int n);
-int* listToArray(T_List l, int *size);
-int* listToArrayWithMemoryFree(T_List *originalList, int *size);
-T_List arrayToList(int *arr, int size);
+T_liste ajoutEnTete(T_liste l, int mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
+T_liste ajoutEnFin(T_liste l, int mydata);
+T_liste ajoutEnN(T_liste l, int pos, int mydata);
 
-// TBD : Faire encapsulation si besoin sur tout le reste du code
+T_liste suppEnTete(T_liste l);
+T_liste suppEnFin(T_liste l);
+T_liste suppEnN(T_liste l, int pos);
+
+T_liste getptrFirstCell(T_liste l);
+T_liste getptrLastCell(T_liste l);
+T_liste getptrNextCell(T_liste l);
+T_liste getptrPrevCell(T_liste l);
+
+int* getPtrData(T_liste l);
+int* getPtrIfData(T_liste l, int mydata);
+void swapPtrData( T_liste source, T_liste destination );
+
+int getNbreCell(T_liste l);
+int getSizeBytes(T_liste l);
+
+T_liste creatNewListeFromFusion(T_liste l1, T_liste l2);
+T_liste addBehind(T_liste debut, T_liste suite);
+
+T_liste findCell(T_liste l, int data);
+int getOccurences(T_liste l, int data);
 
 
-#endif // LIST_H_INCLUDED
+void afficheListeV2( T_liste l);
+
+////////////////////////////    Step 2    ////////////////////////////
+// Utils
+void affichetab(int* tab, int size);
+
+
+void tri_selection(int* tab, int n);
+
+//Q1
+T_liste genlist(int size);
+
+//Q2
+int* list_to_tab(T_liste list,  int size);
+
+
+#endif // LISTEDOUBLE_H_INCLUDED
+
