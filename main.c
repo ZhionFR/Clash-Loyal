@@ -1,5 +1,5 @@
-//NOM prénom étudiant 1 :
-//NOM prénom étudiant 2 :
+//NOM prénom étudiant 1 : MICHEL Thomas
+//NOM prénom étudiant 2 : BABIN Celestin
 
 #include "SDL.h"
 #include "maSDL.h"    //bibliothèque avec des fonction d'affichage pour le jeu 2048
@@ -53,8 +53,8 @@ int main(int argc, char* argv[])
 
         //A COMMENTER quand vous en aurez assez de cliquer sur ces popups ^^
 
-        message("Welcome in ClashLoyal","Ceci est un point de depart de votre future interface de votre jeu ClahLoyal");
-        message("et fin","ECHAP->quitter, S/C ET D/V les gerer les sauvegardes");
+        //message("Welcome in ClashLoyal","Ceci est un point de depart de votre future interface de votre jeu ClahLoyal");
+        //message("et fin","ECHAP->quitter, S/C ET D/V les gerer les sauvegardes");
 
         /**********************************************************************/
         /*                                                                    */

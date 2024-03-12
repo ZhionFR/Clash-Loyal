@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "ListeDouble.h"
+#include "List.h"
 
 // Create an empty list
 void initList(T_List *l){ // No malloc, just initialize at NULL the pointer
