@@ -15,7 +15,7 @@ typedef T_Cell *T_List;
 /********** Basic functions *************/
 
 void initList(T_List *l);
-bool emptyList( T_List l);
+bool isEmptyList(T_List l);
 
 /********** Functions on the pointers *************/
 
@@ -23,8 +23,9 @@ T_List getNextCell(T_List l);
 T_List getPrevCell(T_List l);
 T_List getFirstCell(T_List l);
 T_List getLastCell(T_List l);
-
-void displayListV1( T_List l);
+int* getData(T_List l);
+int* getIfData(T_List l, int mydata);
+void swapData( T_List source, T_List destination );
 //Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de données
 //Utile pour afficher et debuguer les fonctions ci-dessous
 
@@ -36,10 +37,6 @@ T_List delFirst(T_List l);
 T_List delLast(T_List l);
 T_List delAtN(T_List l, int pos);
 
-int* getData(T_List l);
-int* getIfData(T_List l, int mydata);
-void swapData( T_List source, T_List destination );
-
 int getNbCell(T_List l);
 int getSizeBytes(T_List l);
 
@@ -49,7 +46,9 @@ T_List addBehind(T_List debut, T_List suite);
 T_List findCell(T_List l, int data);
 int getOccurences(T_List l, int data);
 
+/********** Printing Functions *************/
 
+void displayListV1( T_List l);
 void displayListV2( T_List l);
 
 ////////////////////////////    Step 2    ////////////////////////////

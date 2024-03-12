@@ -1214,12 +1214,12 @@
 	"maSDL.h"
 	"clashloyal.h"
 
-1710258414 source:d:\programmation\github\clash-loyal\list.c
+1710263500 source:d:\programmation\github\clash-loyal\list.c
 	<stdio.h>
 	<stdlib.h>
 	"list.h"
 	<time.h>
 
-1710258535 d:\programmation\github\clash-loyal\list.h
+1710260366 d:\programmation\github\clash-loyal\list.h
 	<stdbool.h>
 
