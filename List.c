@@ -14,6 +14,60 @@ bool isEmptyList(T_List l){ // Check if a list is empty
     return (l==NULL);
 }
 
+T_List getptrNextCell(T_List l){
+    if (isEmptyList(l)){
+        printf("getptrNextCell: WARNING - No next cell\n");
+        return NULL;
+    }
+    return l->next;
+}
+
+T_List getptrPrevCell(T_List l){
+    if (isEmptyList(l)){
+        printf("getptrPrevCell: WARNING - No previous cell\n");
+        return NULL;
+    }
+    return l->prev;
+}
+
+T_List getptrFirstCell(T_List l){
+    if (isEmptyList(l)){
+        printf("getptrFirstCell - WARNING Empty List (Return NULL)");
+        return NULL;
+    }
+    while (!isEmptyList(getptrPrevCell(l))){
+        l = getptrPrevCell(l);
+    }
+    return l;
+}
+
+T_List getptrLastCell(T_List l){
+    if (isEmptyList(l)){
+        printf("getptrLastCell - WARNING Empty List (Return NULL)");
+        return NULL;
+    }
+    while (!isEmptyList(l->next)){
+        l = l->next;
+    }
+    return l;
+}
+
+
+
+int* getPtrData(T_List l){
+    return l->pdata;
+}
+
+void swapPtrData(T_List source, T_List destination){
+    if (isEmptyList(source) || isEmptyList(destination)){
+        printf("swapPtrData: ERROR - One or both pointers are NULL\n");
+        exit(EXIT_FAILURE);
+    }
+    int *temp = source->pdata;
+    source->pdata = destination->pdata;
+    destination->pdata = temp;
+}
+
 // Display the list ( [1;2;3;...] )
 void displayListV1(T_List l){
     T_List current = l;
@@ -208,57 +262,7 @@ T_List delAtN(T_List l, int pos){
     return l;
 }
 
-T_List getptrFirstCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrFirstCell - WARNING Empty List (Return NULL)");
-        return NULL;
-    }
-    while (!isEmptyList(l->prev)){
-        l = l->prev;
-    }
-    return l;
-}
 
-T_List getptrLastCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrLastCell - WARNING Empty List (Return NULL)");
-        return NULL;
-    }
-    while (!isEmptyList(l->next)){
-        l = l->next;
-    }
-    return l;
-}
-
-T_List getptrNextCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrNextCell: ERROR - No next cell\n");
-        return NULL;
-    }
-    return l->next;
-}
-
-T_List getptrPrevCell(T_List l){
-    if (isEmptyList(l)){
-        printf("getptrPrevCell: ERROR - No previous cell\n");
-        return NULL;
-    }
-    return l->prev;
-}
-
-int* getPtrData(T_List l){
-    return l->pdata;
-}
-
-void swapPtrData(T_List source, T_List destination){
-    if (isEmptyList(source) || isEmptyList(destination)){
-        printf("swapPtrData: ERROR - One or both pointers are NULL\n");
-        exit(EXIT_FAILURE);
-    }
-    int *temp = source->pdata;
-    source->pdata = destination->pdata;
-    destination->pdata = temp;
-}
 
 int getNbreCell(T_List l){
     int count = 0;
