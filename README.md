@@ -1,5 +1,9 @@
 ## TBD :
 
+### Error Codes
+ - [ ] Doc with all error codes (exit(ErrorCode)) with error code an int (except 1, 2, 127, 132, 133, 134, 136, 137, 138, 139, 152, 153, 158, 159)
+
+
 ### Attack phase
  - [ ] Bool tourRoiDetruite(TListePlayer player);
  - [ ] TListePlayer quiEstAPortee(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
