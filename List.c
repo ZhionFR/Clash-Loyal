@@ -252,7 +252,7 @@ void displayListV1(T_List l){
 
 void displayListV2( T_List l){
     printf("\n< ");
-    if (l!=NULL){
+    if (!isEmptyList(l)){
         printf("%i, ", (*getData(l)));
         while(!isEmptyList(getNextCell(l))){
             l = getNextCell(l);
@@ -266,10 +266,11 @@ void displayListV2( T_List l){
 #include <time.h>
 
 // STARTUtils
-void displaytab(int* tab, int size){
+void displayTab(int* tab, int size){
     int i;
     printf("\n[");
-    if (size>=1) printf("%i", tab[0]);
+    if (size>=1)
+        printf("%i", tab[0]);
     for(i=1;i<size;i++){
         printf(", %i", tab[i]);
     }
@@ -281,10 +282,11 @@ void displaytab(int* tab, int size){
 
 void selecti(int* tab, int size){
     int i, j, min, temp;
-
     for (i=0; i<size-1; i++){
         min = i;
-        for (j=i; j<size; j++)if (tab[j]<tab[min]) min = j;
+        for (j=i; j<size; j++)
+            if (tab[j]<tab[min])
+                min = j;
         temp = tab[i];
         tab[i] = tab[min];
         tab[min] = temp;
@@ -292,7 +294,7 @@ void selecti(int* tab, int size){
 }
 
 // Question 1
-T_List genlist(int size){
+T_List genList(int size){
     int i, n;
     T_List l = NULL;
     for(i=0;i<size;i++){
@@ -304,9 +306,9 @@ T_List genlist(int size){
 }
 
 // Question 2
-int* list_to_tab(T_List list,  int size){
+int* listToTab(T_List list,  int size){
     int i = 0, *tab;
-    while(i<size && list!=NULL){
+    while(i<size && !isEmptyList(list)){
         tab[i] = *(list->pdata);
         list = delFirst(list);
     }
