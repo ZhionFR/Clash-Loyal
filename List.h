@@ -43,6 +43,7 @@ T_List delAtN(T_List l, int pos);
 
 /********** Others *************/
 
+int lenList(T_List l);
 int getNbCell(T_List l);
 int getSizeBytes(T_List l);
 
