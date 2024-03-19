@@ -66,8 +66,6 @@ int main(int argc, char* argv[])
         *player2Elixir = 0;
 
 
-
-
         /*********************************************************************/
 
         // boucle principale du jeu
