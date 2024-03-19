@@ -25,10 +25,10 @@
 
 ### Create Phase
  - [ ] Tunite AcheteUnite(int *elixirEnStockduJoueur);
-   - [ ] Tunite *creeArcher(int posx, int posy);
-   - [ ] Tunite *creeGargouille(int posx, int posy);
-   - [ ] Tunite *creeDragon(int posx, int posy);
-   - [ ] Tunite *creeChevalier(int posx, int posy);
+   - [X] Tunite *creeArcher(int posx, int posy);
+   - [X] Tunite *creeGargouille(int posx, int posy);
+   - [X] Tunite *creeDragon(int posx, int posy);
+   - [X] Tunite *creeChevalier(int posx, int posy);
  - [ ] Void AjouterUnite(TListePlayer *player, Tunite *nouvelleUnite);
 
 ### Menu-ing
