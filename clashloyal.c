@@ -2,6 +2,9 @@
 #include "clashloyal.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "list.h"
+
+
 
 //typedef Tunite* ** TplateauJeu;
 
@@ -13,6 +16,7 @@ TplateauJeu AlloueTab2D(int largeur, int hauteur){
     }
     return jeu;  //tab2D contenant des pointeurs
 }
+
 void initPlateauAvecNULL(TplateauJeu jeu,int largeur, int hauteur){
     for (int i=0;i<largeur;i++){
         for (int j=0;j<hauteur;j++){
@@ -78,3 +82,22 @@ Tunite *creeTourRoi(int posx, int posy){
     nouv->coutEnElixir = 0;
     return nouv;
 }
+
+
+/*
+
+void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu){
+    int i, lon, lar, n;
+    int posx; posy;
+    nbUnit = lenList(player);
+    for(i=0;i<n;i++){
+        posx = player[i].pdata
+    }
+
+}
+
+*/
+
+
+
+

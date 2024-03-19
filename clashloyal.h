@@ -4,6 +4,8 @@
 #define LARGEURJEU 11
 #define HAUTEURJEU 19
 
+#include "list.h"
+
 typedef enum{tour, tourRoi, archer, chevalier, dragon, gargouille} TuniteDuJeu;
 typedef enum{sol, solEtAir, air } Tcible;
 
@@ -28,11 +30,7 @@ typedef struct {
     int coutEnElixir;
 } Tunite;
 
-typedef struct T_cell{
-    struct T_cell *suiv;
-    Tunite *pdata; //pointeur vers une unité
-} *TListePlayer;
-
+typedef T_List *TListePlayer;
 
 typedef Tunite* ** TplateauJeu;  ////tableau a deux dimensions de largeur 11 et hauteur 19 contenant des pointeurs (Tunite*)
 
@@ -45,9 +43,9 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur);
 Tunite *creeTour(int posx, int posy);
 Tunite *creeTourRoi(int posx, int posy);
 
-/*
+
 Bool tourRoiDetruite(TListePlayer player);
-void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu)
+void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu);
 
 TListePlayer quiEstAPortee(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
 TListePlayer combat(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
@@ -62,6 +60,6 @@ Void supprimerUnite(TListePlayer *player, Tunite *UniteDetruite);
 Tunite AcheteUnite(int *elixirEnStockduJoueur);
 Void AjouterUnite(TListePlayer *player, Tunite *nouvelleUnite);
 
-*/
+
 
 #endif // JEU2048_H_INCLUDED

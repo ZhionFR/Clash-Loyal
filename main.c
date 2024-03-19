@@ -51,17 +51,20 @@ int main(int argc, char* argv[])
         prepareAllSpriteDuJeu(jeu,LARGEURJEU,HAUTEURJEU,TabSprite,pWinSurf);
         maj_fenetre(pWindow);
 
+
+
         //A COMMENTER quand vous en aurez assez de cliquer sur ces popups ^^
 
         //message("Welcome in ClashLoyal","Ceci est un point de depart de votre future interface de votre jeu ClahLoyal");
         //message("et fin","ECHAP->quitter, S/C ET D/V les gerer les sauvegardes");
 
-        /**********************************************************************/
-        /*                                                                    */
-        /*              DEFINISSEZ/INITIALISER ICI VOS VARIABLES              */
-        /*
-        // FIN de vos variables                                                              */
-        /**********************************************************************/
+        /***************************** Variables *****************************/
+
+        Tunite UnitList[306]; // 209 sol, 209 air, 56*2 bords
+        int time = 0;
+
+
+        /*********************************************************************/
 
         // boucle principale du jeu
         int cont = 1;
@@ -69,14 +72,21 @@ int main(int argc, char* argv[])
                 SDL_PumpEvents(); //do events
 
 
-                /***********************************************************************/
-                /*                                                                     */
-                /*                                                                     */
-                //APPELEZ ICI VOS FONCTIONS QUI FONT EVOLUER LE JEU
-                /*                                                                     */
-                /*                                                                     */
-                // FIN DE VOS APPELS
-                /***********************************************************************/
+                /******************************** Jeu ********************************/
+
+                // Update attaques
+
+                if (time%3){
+                    // Update positions
+
+                    // Update elexirs
+
+                    // Update achats
+
+                }
+
+                time += 1;
+                /*********************************************************************/
                 //affichage du jeu à chaque tour
                 efface_fenetre(pWinSurf);
                 prepareAllSpriteDuJeu(jeu,LARGEURJEU,HAUTEURJEU,TabSprite,pWinSurf);
