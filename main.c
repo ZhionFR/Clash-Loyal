@@ -61,6 +61,10 @@ int main(int argc, char* argv[])
         /***************************** Variables *****************************/
 
         int time = 0;
+        int *player1Elixir, *player2Elixir;
+        *player1Elixir = 0;
+        *player2Elixir = 0;
+
 
 
 
