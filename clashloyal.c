@@ -6,7 +6,7 @@
 #include "type.h"
 #include <time.h>
 
-//typedef Tunite* ** TplateauJeu;
+/**************** Tab alloc/display ****************/
 
 TplateauJeu AlloueTab2D(int largeur, int hauteur){
     TplateauJeu jeu;
@@ -50,40 +50,8 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
     }
 }
 
-Tunite *creeTour(int posx, int posy){
-    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
-    nouv->nom = tour;
-    nouv->cibleAttaquable = solEtAir;
-    nouv->maposition = sol;
-    nouv->pointsDeVie = 500;
-    nouv->vitesseAttaque = 1.0;
-    nouv->degats = 100;
-    nouv->portee = 3;
-    nouv->vitessedeplacement = 0;
-    nouv->posX = posx;
-    nouv->posY = posy;
-    nouv->peutAttaquer = 1;
-    nouv->coutEnElixir = 0;
-    return nouv;
-}
-Tunite *creeTourRoi(int posx, int posy){
-    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
-    nouv->nom = tourRoi;
-    nouv->cibleAttaquable = solEtAir;
-    nouv->maposition = sol;
-    nouv->pointsDeVie = 800;
-    nouv->vitesseAttaque = 1.2;
-    nouv->degats = 120;
-    nouv->portee = 4;
-    nouv->vitessedeplacement = 0;
-    nouv->posX = posx;
-    nouv->posY = posy;
-    nouv->peutAttaquer = 1;
-    nouv->coutEnElixir = 0;
-    return nouv;
-}
 
-/****************** Encapsulation de mes couilles ******************/
+/****************** Get functions ******************/
 
 TuniteDuJeu getUnitName(Tunite unit){
     return unit->nom;
@@ -119,6 +87,7 @@ int getElixirCost(Tunite unit){
     return unit->coutEnElixir;
 }
 
+/****************** Set functions ******************/
 
 void setUnitName(Tunite unit, TuniteDuJeu name){
     unit->nom = name;
@@ -154,37 +123,47 @@ void setElixirCost(Tunite unit, int elixircost){
     unit->coutEnElixir = elixircost;
 }
 
+/****************** Creating Units ******************/
 
-/*******************************************************************/
+Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, float atkDelay, int damage, int range, float movementSpeed, int posX, int posY, int elixirCost){
+    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
+    nouv->nom = name;
+    nouv->cibleAttaquable = target;
+    nouv->maposition = targetCategory;
+    nouv->pointsDeVie = MaxHP;
+    nouv->vitesseAttaque = atkDelay;
+    nouv->degats = damage;
+    nouv->portee = range;
+    nouv->vitessedeplacement = movementSpeed;
+    nouv->posX = posX;
+    nouv->posY = posY;
+    nouv->coutEnElixir = elixirCost;
+    return nouv;
+}
+
+Tunite *creeTour(posx, posy){
+    return createUnit(tour, solEtAir, sol, 500, 1.0, 100, 3, 0, posx, posy, 0);
+}
+Tunite *creeTourRoi(posx, posy){
+    return createUnit(tourRoi, solEtAir, sol, 800, 1.2, 120, 4, 0, posx, posy, 0);
+}
+Tunite *creeChevalier(posx, posy){
+    return createUnit(chevalier, sol, sol, 400, 1.5, 250, 1, 2.0, posx, posy, 4);
+}
+Tunite *creeArcher(posx, posy){
+    return createUnit(archer, solEtAir, sol, 80, 0.7, 120, 3, 1.0, posx, posy, 2);
+}
+Tunite *creeDragon(posx, posy){
+    return createUnit(name, solEtAir, air, 200, 1.1, 70, 2, 2.0, posx, posy, 3);
+}
+Tunite *creeGargouille(posx, posy){
+    return createUnit(name, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);
+}
+
+
 
 void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, Tunite* UnitList, int whichPlayer){
-    int i, j, n, movesLeft, rand;
-    Tunite unit;
-    nbUnit = lenList(player);
-    srand(time(NULL));
-    rand = rand()%2;
-    for(i=0;i<n;i++){
-        unit = UnitList[player[i].pdata];
-        movesLeft = getMoveSpeed(unit);
-        for(j=0;j<movesLeft;j++){
-            if(unit.posY != 3 && whichPlayer == 1){
-                if(jeu[getPosX(unit)][getPosY(unit)+1] == NULL){
 
-                }
-            }
-            if(getPosY(unit) == 15 && whichPlayer == 2){
-
-            }
-            if(getPosX(unit) == 5){
-
-            }
-            if(getPosX(unit)>=5){
-
-            } else if(getPosX(unit)<=5){
-
-            }
-        }
-    }
 }
 
 
