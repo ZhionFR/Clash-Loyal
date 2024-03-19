@@ -162,7 +162,7 @@ Tunite *creeGargouille(posx, posy){
 
 
 
-void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, Tunite* UnitList, int whichPlayer){
+void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, int whichPlayer){
 
 }
 
