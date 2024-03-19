@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
-
-
+#include <r
+#include <time.h>
 
 //typedef Tunite* ** TplateauJeu;
 
@@ -40,7 +40,7 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
     printf("\n");
     for (int j=0;j<hauteur;j++){
         for (int i=0;i<largeur;i++){
-                // A ne pas donner aux etudiants
+            // A ne pas donner aux etudiants
             if (jeu[i][j] != NULL){
                     printf("%s",InitialeUnite[jeu[i][j]->nom]);
             }
@@ -82,21 +82,127 @@ Tunite *creeTourRoi(int posx, int posy){
     nouv->coutEnElixir = 0;
     return nouv;
 }
-
-
 /*
+    TuniteDuJeu nom;
+    Tcible cibleAttaquable;	//indique la position des unités que l’on peut attaquer
+    Tcible maposition;		//indique soit « air » soit « sol », utile pour savoir
+                            //qui peut nous attaquer
+    int pointsDeVie;
+    float vitesseAttaque;	//en seconde, plus c’est petit plus c’est rapide
+    int degats;
+    int portee ;			//en mètre, distance sur laquelle on peut atteindre une
+                            //cible
 
-void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu){
-    int i, lon, lar, n;
-    int posx; posy;
-    nbUnit = lenList(player);
-    for(i=0;i<n;i++){
-        posx = player[i].pdata
-    }
+    float vitessedeplacement;	//en m/s
+    int posX, posY;			//position sur le plateau de jeu
 
+    int coutEnElixir;
+*/
+/****************** Encapsulation de mes couilles ******************/
+
+TuniteDuJeu getUnitName(Tunite unit){
+    return unit->nom;
+}
+Tcible getUnitTarget(Tunite unit){
+    return unit->cibleAttaquable;
+}
+Tcible getTargetCategory(Tunite unit){
+    return unit->maposition;
+}
+int getHPLeft(Tunite unit){
+    return unit->pointsDeVie;
+}
+float getAttackDelay(Tunite unit){
+    return unit->vitesseAttaque;
+}
+int getDamage(Tunite unit){
+    return unit->degats;
+}
+int getRange(Tunite unit){
+    return unit->portee;
+}
+int getMoveSpeed(Tunite unit){
+    return unit->vitessedeplacement;
+}
+int getPosX(Tunite unit){
+    return unit->posX;
+}
+int getPosY(Tunite unit){
+    return unit->posY;
+}
+int getElixirCost(Tunite unit){
+    return unit->coutEnElixir;
 }
 
-*/
+
+void setUnitName(Tunite unit, TuniteDuJeu name){
+    unit->nom = name;
+}
+void setUnitTarget(Tunite unit, Tcible target){
+    unit->cibleAttaquable = target;
+}
+void setTargetCategory(Tunite unit, Tcible position){
+    unit->maposition = position;
+}
+void setHPLeft(Tunite unit, int hp){
+    unit->pointsDeVie = hp;
+}
+void setAttackDelay(Tunite unit, int atkdelay){
+    unit->vitesseAttaque = atkdelay;
+}
+void setDamage(Tunite unit, int dmg){
+    unit->degats = dmg;
+}
+void setRange(Tunite unit, int range){
+    unit->portee, range;
+}
+void setMoveSpeed(Tunite unit, int movespeed){
+    unit->vitessedeplacement = movespeed;
+}
+void setPosX(Tunite unit, int posx){
+    unit->posX = posx;
+}
+void setPosY(Tunite unit, int posy){
+    unit->posY = posy;
+}
+void setElixirCost(Tunite unit, int elixircost){
+    unit->coutEnElixir = elixircost;
+}
+
+
+/*******************************************************************/
+
+void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, Tunite* UnitList, int whichPlayer){
+    int i, j, n, movesLeft, rand;
+    Tunite unit;
+    nbUnit = lenList(player);
+    srand(time(NULL));
+    rand = rand()%2;
+    for(i=0;i<n;i++){
+        unit = UnitList[player[i].pdata];
+        movesLeft = unit.vitessedeplacement;
+        for(j=0;j<movesLeft;j++){
+            if(unit.posY != 3 && whichPlayer == 1){
+                if(jeu[unit.posX][unit.posY+1] == NULL){
+
+                }
+            }
+            if(unit.posY == 15 && whichPlayer == 2){
+
+            }
+            if(unit.posX == 5){
+
+            }
+            if(unit.posX>=5){
+
+            } else if(unit.posX<=5){
+
+            }
+        }
+    }
+}
+
+
 
 
 
