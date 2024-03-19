@@ -3,14 +3,6 @@
 
 #include <stdbool.h>
 
-////////////////////////////    Step 1    ////////////////////////////
-
-typedef struct T_Cell{
-    struct T_Cell *next;
-    struct T_Cell *prev;
-    int *pdata;              // Be careful to do a malloc before using this
-} T_Cell;
-typedef T_Cell *T_List;
 
 /********** Basic functions *************/
 
@@ -58,7 +50,7 @@ int getOccurences(T_List l, int data);
 void displayListV1( T_List l);
 void displayListV2( T_List l);
 
-////////////////////////////    Step 2    ////////////////////////////
+
 // Utils
 void displayTab(int* tab, int size);
 

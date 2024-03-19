@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
+#include "type.h"
 
 
 /********** Basic functions *************/
@@ -36,13 +37,14 @@ T_List getLastCell(T_List l){
     return l;
 }
 
-int* getData(T_List l){
+Tunite* getData(T_List l){
     if (!isEmptyList(l))
         return l->pdata;
     printf("ERROR - getData : Empty list.\n");
     exit(EXIT_FAILURE);
 }
 
+/* possible ?
 int* getIfData(T_List l, int mydata){
     l = getFirstCell(l);
     do {
@@ -53,17 +55,18 @@ int* getIfData(T_List l, int mydata){
     printf("ERROR - getIfData : Data not in list.\n");
     exit(EXIT_FAILURE);
 }
+*/
 
 void swapData(T_List source, T_List destination ){
-    int* temp = getData(source);
+    Tunite* temp = getData(source);
     source->pdata = getData(destination);
     destination->pdata = temp;
 }
 
 /********** Add/Remove in List *************/
 
-T_List addFirst(T_List l, int mydata){
-    int* data = (int*)malloc(sizeof(int));
+T_List addFirst(T_List l, Tunite mydata){
+    Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
     *data = mydata;
     initList(&new->prev);
@@ -75,8 +78,8 @@ T_List addFirst(T_List l, int mydata){
     return new;
 }
 
-T_List addLast(T_List l, int mydata){
-    int* data = (int*)malloc(sizeof(int));
+T_List addLast(T_List l, Tunite mydata){
+    Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
     initList(&new->prev);
@@ -92,7 +95,7 @@ T_List addLast(T_List l, int mydata){
     return l;
 }
 
-T_List addAtN(T_List l, int pos, int mydata){
+T_List addAtN(T_List l, int pos, Tunite mydata){
     if (isEmptyList(l) && pos > 0) {
         printf("WARNING - addAtN : Non zero Index in NULL List (adding first)\n");
         return addFirst(l, mydata);
@@ -100,7 +103,7 @@ T_List addAtN(T_List l, int pos, int mydata){
     if (pos == 0) {
         return addFirst(l, mydata);
     }
-    int* data = (int*)malloc(sizeof(int));
+    Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
     initList(&new->prev);
@@ -217,6 +220,7 @@ T_List addBehind(T_List l1, T_List l2){
     return getFirstCell(l2);
 }
 
+/* possible ?
 T_List findCell(T_List l, int data){
     l = getFirstCell(l);
     do {
@@ -238,102 +242,4 @@ int getOccurences(T_List l, int data){
     }
     return n;
 }
-
-/********** Printing Functions *************/
-
-void displayListV1(T_List l){
-    printf("\n< ");
-    while(!isEmptyList(l)){
-        printf("%d, ",(*(*l).pdata));
-        l = getNextCell(l);
-    }
-    printf(">\n");
-}
-
-void displayListV2( T_List l){
-    printf("\n< ");
-    if (!isEmptyList(l)){
-        printf("%i, ", (*getData(l)));
-        while(!isEmptyList(getNextCell(l))){
-            l = getNextCell(l);
-            printf("%i, ", (*getData(l)));
-        }
-    }
-    printf(">\n");
-}
-
-////////////////////////////    Step 2    ////////////////////////////
-#include <time.h>
-
-// STARTUtils
-void displayTab(int* tab, int size){
-    int i;
-    printf("\n[");
-    if (size>=1)
-        printf("%i", tab[0]);
-    for(i=1;i<size;i++){
-        printf(", %i", tab[i]);
-    }
-    printf("]\n");
-}
-
-
-// ENDUtils
-
-void selecti(int* tab, int size){
-    int i, j, min, temp;
-    for (i=0; i<size-1; i++){
-        min = i;
-        for (j=i; j<size; j++)
-            if (tab[j]<tab[min])
-                min = j;
-        temp = tab[i];
-        tab[i] = tab[min];
-        tab[min] = temp;
-    }
-}
-
-// Question 1
-T_List genList(int size){
-    int i, n;
-    T_List l = NULL;
-    for(i=0;i<size;i++){
-        srand(time(NULL));
-        n = rand()%100;
-        l = addLast(l, n);
-    }
-    return l;
-}
-
-// Question 2
-int* listToTab(T_List list,  int size){
-    int i = 0, *tab;
-    while(i<size && !isEmptyList(list)){
-        tab[i] = *(list->pdata);
-        list = delFirst(list);
-    }
-    return tab;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/

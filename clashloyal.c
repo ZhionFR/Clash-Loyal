@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
-#include <r
+#include "type.h"
 #include <time.h>
 
 //typedef Tunite* ** TplateauJeu;
@@ -82,22 +82,7 @@ Tunite *creeTourRoi(int posx, int posy){
     nouv->coutEnElixir = 0;
     return nouv;
 }
-/*
-    TuniteDuJeu nom;
-    Tcible cibleAttaquable;	//indique la position des unités que l’on peut attaquer
-    Tcible maposition;		//indique soit « air » soit « sol », utile pour savoir
-                            //qui peut nous attaquer
-    int pointsDeVie;
-    float vitesseAttaque;	//en seconde, plus c’est petit plus c’est rapide
-    int degats;
-    int portee ;			//en mètre, distance sur laquelle on peut atteindre une
-                            //cible
 
-    float vitessedeplacement;	//en m/s
-    int posX, posY;			//position sur le plateau de jeu
-
-    int coutEnElixir;
-*/
 /****************** Encapsulation de mes couilles ******************/
 
 TuniteDuJeu getUnitName(Tunite unit){
@@ -180,22 +165,22 @@ void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, Tunite* Uni
     rand = rand()%2;
     for(i=0;i<n;i++){
         unit = UnitList[player[i].pdata];
-        movesLeft = unit.vitessedeplacement;
+        movesLeft = getMoveSpeed(unit);
         for(j=0;j<movesLeft;j++){
             if(unit.posY != 3 && whichPlayer == 1){
-                if(jeu[unit.posX][unit.posY+1] == NULL){
+                if(jeu[getPosX(unit)][getPosY(unit)+1] == NULL){
 
                 }
             }
-            if(unit.posY == 15 && whichPlayer == 2){
+            if(getPosY(unit) == 15 && whichPlayer == 2){
 
             }
-            if(unit.posX == 5){
+            if(getPosX(unit) == 5){
 
             }
-            if(unit.posX>=5){
+            if(getPosX(unit)>=5){
 
-            } else if(unit.posX<=5){
+            } else if(getPosX(unit)<=5){
 
             }
         }

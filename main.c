@@ -60,7 +60,6 @@ int main(int argc, char* argv[])
 
         /***************************** Variables *****************************/
 
-        Tunite UnitList[306]; // 209 sol, 209 air, 56*2 bords
         int time = 0;
 
 
