@@ -62,6 +62,10 @@ int main(int argc, char* argv[])
 
         Tunite UnitList[306]; // 209 sol, 209 air, 56*2 bords
         int time = 0;
+        int *player1Elixir, *player2Elixir;
+        *player1Elixir = 0;
+        *player2Elixir = 0;
+
 
 
 

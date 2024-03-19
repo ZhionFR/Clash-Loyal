@@ -50,6 +50,10 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
     }
 }
 
+Tunite AcheteUnite(int *elixirEnStockduJoueur){
+
+}
+
 Tunite *creeTour(int posx, int posy){
     Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
     nouv->nom = tour;
@@ -62,10 +66,10 @@ Tunite *creeTour(int posx, int posy){
     nouv->vitessedeplacement = 0;
     nouv->posX = posx;
     nouv->posY = posy;
-    nouv->peutAttaquer = 1;
     nouv->coutEnElixir = 0;
     return nouv;
 }
+
 Tunite *creeTourRoi(int posx, int posy){
     Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
     nouv->nom = tourRoi;
@@ -78,10 +82,77 @@ Tunite *creeTourRoi(int posx, int posy){
     nouv->vitessedeplacement = 0;
     nouv->posX = posx;
     nouv->posY = posy;
-    nouv->peutAttaquer = 1;
     nouv->coutEnElixir = 0;
     return nouv;
 }
+<<<<<<< Updated upstream
+=======
+
+Tunite *creeChevalier(int posx, int posy){
+    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
+    nouv->nom = chevalier;
+    nouv->cibleAttaquable = solEtAir;
+    nouv->maposition = sol;
+    nouv->pointsDeVie = 400;
+    nouv->vitesseAttaque = 1.5;
+    nouv->degats = 250;
+    nouv->portee = 1;
+    nouv->vitessedeplacement = 2;
+    nouv->posX = posx;
+    nouv->posY = posy;
+    nouv->coutEnElixir = 2;
+    return nouv;
+}
+
+Tunite *creeArcher(int posx, int posy){
+    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
+    nouv->nom = archer;
+    nouv->cibleAttaquable = solEtAir;
+    nouv->maposition = sol;
+    nouv->pointsDeVie = 80;
+    nouv->vitesseAttaque = 0.7;
+    nouv->degats = 120;
+    nouv->portee = 3;
+    nouv->vitessedeplacement = 1.0;
+    nouv->posX = posx;
+    nouv->posY = posy;
+    nouv->coutEnElixir = 2;
+    return nouv;
+}
+
+Tunite *creeDragon(int posx, int posy){
+    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
+    nouv->nom = dragon;
+    nouv->cibleAttaquable = solEtAir;
+    nouv->maposition = air;
+    nouv->pointsDeVie = 200;
+    nouv->vitesseAttaque = 1.1;
+    nouv->degats = 70;
+    nouv->portee = 2;
+    nouv->vitessedeplacement = 2.0;
+    nouv->posX = posx;
+    nouv->posY = posy;
+    nouv->coutEnElixir = 3;
+    return nouv;
+}
+
+Tunite *creeGargouille(int posx, int posy){
+    Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
+    nouv->nom = gargouille;
+    nouv->cibleAttaquable = solEtAir;
+    nouv->maposition = air;
+    nouv->pointsDeVie = 80;
+    nouv->vitesseAttaque = 0.6;
+    nouv->degats = 90;
+    nouv->portee = 1;
+    nouv->vitessedeplacement = 3.0;
+    nouv->posX = posx;
+    nouv->posY = posy;
+    nouv->coutEnElixir = 1;
+    return nouv;
+}
+
+>>>>>>> Stashed changes
 /*
     TuniteDuJeu nom;
     Tcible cibleAttaquable;	//indique la position des unités que l’on peut attaquer
