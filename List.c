@@ -3,6 +3,34 @@
 #include "list.h"
 #include "type.h"
 
+/********** Basic Get / Set *************/
+
+T_List getNextCell(T_List l){
+    return l->next;
+}
+
+T_List getPrevCell(T_List l){
+    return l->prev;
+}
+
+Tunite* getData(T_List l){
+    if (!isEmptyList(l))
+        return l->pdata;
+    printf("ERROR - getData : Empty list.\n");
+    exit(EXIT_FAILURE);
+}
+
+void setNextCell(T_List l1, T_List l2){
+    l1->next = l2;
+}
+
+void setPrevCell(T_List l){
+    l1->prev = l2;
+}
+
+void setData(T_List l, int mydata){
+    l->pdata = mydata;
+}
 
 /********** Basic functions *************/
 
@@ -17,13 +45,6 @@ bool isEmptyList(T_List l){
 
 /********** Action on the pointers *************/
 
-T_List getNextCell(T_List l){
-    return l->next;
-}
-
-T_List getPrevCell(T_List l){
-    return l->prev;
-}
 
 T_List getFirstCell(T_List l){
     while(!isEmptyList(getPrevCell(l)))
@@ -35,13 +56,6 @@ T_List getLastCell(T_List l){
     while (!isEmptyList(getNextCell(l)))
         l = getNextCell(l);
     return l;
-}
-
-Tunite* getData(T_List l){
-    if (!isEmptyList(l))
-        return l->pdata;
-    printf("ERROR - getData : Empty list.\n");
-    exit(EXIT_FAILURE);
 }
 
 /* possible ?
@@ -59,8 +73,8 @@ int* getIfData(T_List l, int mydata){
 
 void swapData(T_List source, T_List destination ){
     Tunite* temp = getData(source);
-    source->pdata = getData(destination);
-    destination->pdata = temp;
+    setData(source, getData(destination));
+    setData(destination, temp);
 }
 
 /********** Add/Remove in List *************/
@@ -69,12 +83,12 @@ T_List addFirst(T_List l, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
     *data = mydata;
-    initList(&new->prev);
-    new->pdata = data;
-    new->next = l;
+    initList(&getPrevCell(new));
+    setData(new, data);
+    setNextCell(new,l);
     if(isEmptyList(l))
         return new;
-    l->prev = new;
+    setPrevCell(l, new);
     return new;
 }
 
@@ -82,16 +96,16 @@ T_List addLast(T_List l, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(&new->prev);
-    new->pdata = data;
-    initList(&new->next);
+    initList(&getPrevCell(new));
+    setData(new, data);
+    initList(&getNextCell(new)));
     if (isEmptyList(l))
         return new;
     T_List temp = l;
     while (!isEmptyList(getNextCell(temp)))
         temp = getNextCell(temp);
-    temp->next = new;
-    new->prev = temp;
+    setNextCell(temp, new);
+    setPrevCell(new, temp);
     return l;
 }
 
@@ -106,9 +120,9 @@ T_List addAtN(T_List l, int pos, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(&new->prev);
-    new->pdata = data;
-    initList(&new->next);
+    initList(&getPrevCell(new));
+    setData(new, data);
+    initList(&getNextCell(new));
     T_List temp = l;
     int index = 0;
     while (!isEmptyList(getNextCell(temp)) && index < pos - 1){
@@ -119,12 +133,12 @@ T_List addAtN(T_List l, int pos, Tunite mydata){
         printf("WARNING - addAtN : Index out of Bounds (adding last)\n");
         return addLast(l, mydata);
     }
-    new->next = getNextCell(temp);
+    setNextCell(new, getNextCell(temp));
     if (!isEmptyList(getNextCell(temp))) {
-        temp->next->prev = new;
+        setPrevCell(getNextCell(temp), new);
     }
-    temp->next = new;
-    new->prev = temp;
+    setNextCell(temp, new);
+    setPrevCell(new, temp);
     return l;
 }
 
@@ -145,16 +159,16 @@ T_List delLast(T_List l){
         return NULL;
     }
     if (isEmptyList(getNextCell(l))){
-        free(l->pdata);
+        free(getData(l));
         free(l);
         return NULL;
     }
     T_List temp = l;
-    while (!isEmptyList(temp->next->next))
+    while (!isEmptyList(getNextCell(getNextCell(temp))))
         temp = getNextCell(temp);
     free(getData(getNextCell(temp)));
     free(getNextCell(temp));
-    temp->next = NULL;
+    setNextCell(temp, NULL);
     return l;
 }
 
@@ -207,16 +221,18 @@ T_List creatNewListeFromFusion(T_List l1, T_List l2){
     new = l1;
     while(!isEmptyList(getNextCell(new)))
         new = getNextCell(new);
-    new->next = l2;
+    setNextCell(new, l2);
     return new;
 }
 
 T_List addBehind(T_List l1, T_List l2){
-    if (isEmptyList(l1)) return l2;
-    if (isEmptyList(l2)) return l1;
+    if (isEmptyList(l1))
+        return l2;
+    if (isEmptyList(l2))
+        return l1;
     T_List lastCellL1 = getLastCell(l1);
-    lastCellL1->next = l2;
-    l2->prev = lastCellL1;
+    setNextCell(lastCellL1, l2);
+    setPrevCell(l2, lastCellL1);
     return getFirstCell(l2);
 }
 

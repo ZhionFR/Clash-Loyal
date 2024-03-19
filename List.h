@@ -3,6 +3,15 @@
 
 #include <stdbool.h>
 
+/********** Basic Get / Set *************/
+
+T_List getNextCell(T_List l);
+T_List getPrevCell(T_List l);
+int* getData(T_List l);
+
+void setNextCell(T_List l);
+void setPrevCell(T_List l);
+void setData(T_List l);
 
 /********** Basic functions *************/
 
@@ -13,11 +22,8 @@ bool isEmptyList(T_List l);
 
 /********** Functions on the pointers *************/
 
-T_List getNextCell(T_List l);
-T_List getPrevCell(T_List l);
 T_List getFirstCell(T_List l);
 T_List getLastCell(T_List l);
-int* getData(T_List l);
 int* getIfData(T_List l, int mydata);
 void swapData( T_List source, T_List destination );
 //Pour "AfficheListeV1" Vous avez le droit de lire directement dans la structure de données
