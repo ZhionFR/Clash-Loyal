@@ -1,8 +1,7 @@
-#include "SDL.h"
+
 #include "clashloyal.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "list.h"
 #include "type.h"
 #include <time.h>
 
@@ -53,73 +52,73 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
 
 /****************** Get functions ******************/
 
-TuniteDuJeu getUnitName(Tunite unit){
+TuniteDuJeu getUnitName(Tunite* unit){
     return unit->nom;
 }
-Tcible getUnitTarget(Tunite unit){
+Tcible getUnitTarget(Tunite* unit){
     return unit->cibleAttaquable;
 }
-Tcible getTargetCategory(Tunite unit){
+Tcible getTargetCategory(Tunite* unit){
     return unit->maposition;
 }
-int getHPLeft(Tunite unit){
+int getHPLeft(Tunite* unit){
     return unit->pointsDeVie;
 }
-float getAttackDelay(Tunite unit){
+float getAttackDelay(Tunite* unit){
     return unit->vitesseAttaque;
 }
-int getDamage(Tunite unit){
+int getDamage(Tunite* unit){
     return unit->degats;
 }
-int getRange(Tunite unit){
+int getRange(Tunite* unit){
     return unit->portee;
 }
-int getMoveSpeed(Tunite unit){
+int getMoveSpeed(Tunite* unit){
     return unit->vitessedeplacement;
 }
-int getPosX(Tunite unit){
+int getPosX(Tunite* unit){
     return unit->posX;
 }
-int getPosY(Tunite unit){
+int getPosY(Tunite* unit){
     return unit->posY;
 }
-int getElixirCost(Tunite unit){
+int getElixirCost(Tunite* unit){
     return unit->coutEnElixir;
 }
 
 /****************** Set functions ******************/
 
-void setUnitName(Tunite unit, TuniteDuJeu name){
+void setUnitName(Tunite* unit, TuniteDuJeu name){
     unit->nom = name;
 }
-void setUnitTarget(Tunite unit, Tcible target){
+void setUnitTarget(Tunite* unit, Tcible target){
     unit->cibleAttaquable = target;
 }
-void setTargetCategory(Tunite unit, Tcible position){
+void setTargetCategory(Tunite* unit, Tcible position){
     unit->maposition = position;
 }
-void setHPLeft(Tunite unit, int hp){
+void setHPLeft(Tunite* unit, int hp){
     unit->pointsDeVie = hp;
 }
-void setAttackDelay(Tunite unit, int atkdelay){
+void setAttackDelay(Tunite* unit, int atkdelay){
     unit->vitesseAttaque = atkdelay;
 }
-void setDamage(Tunite unit, int dmg){
+void setDamage(Tunite* unit, int dmg){
     unit->degats = dmg;
 }
-void setRange(Tunite unit, int range){
+void setRange(Tunite* unit, int range){
     unit->portee, range;
 }
-void setMoveSpeed(Tunite unit, int movespeed){
+void setMoveSpeed(Tunite* unit, int movespeed){
     unit->vitessedeplacement = movespeed;
 }
-void setPosX(Tunite unit, int posx){
+void setPosX(Tunite* unit, int posx){
     unit->posX = posx;
 }
-void setPosY(Tunite unit, int posy){
+void setPosY(Tunite* unit, int posy){
     unit->posY = posy;
 }
-void setElixirCost(Tunite unit, int elixircost){
+void setElixirCost(Tunite* unit, int elixircost){
     unit->coutEnElixir = elixircost;
 }
 
@@ -154,10 +153,10 @@ Tunite *creeArcher(posx, posy){
     return createUnit(archer, solEtAir, sol, 80, 0.7, 120, 3, 1.0, posx, posy, 2);
 }
 Tunite *creeDragon(posx, posy){
-    return createUnit(name, solEtAir, air, 200, 1.1, 70, 2, 2.0, posx, posy, 3);
+    return createUnit(dragon, solEtAir, air, 200, 1.1, 70, 2, 2.0, posx, posy, 3);
 }
 Tunite *creeGargouille(posx, posy){
-    return createUnit(name, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);
+    return createUnit(gargouille, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);
 }
 
 

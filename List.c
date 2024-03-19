@@ -24,11 +24,11 @@ void setNextCell(T_List l1, T_List l2){
     l1->next = l2;
 }
 
-void setPrevCell(T_List l){
+void setPrevCell(T_List l1, T_List l2){
     l1->prev = l2;
 }
 
-void setData(T_List l, int mydata){
+void setData(T_List l, Tunite* mydata){
     l->pdata = mydata;
 }
 

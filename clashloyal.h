@@ -4,8 +4,8 @@
 #define LARGEURJEU 11
 #define HAUTEURJEU 19
 
-#include "list.h"
-
+#include "type.h"
+#include <stdbool.h>
 
 
 TplateauJeu AlloueTab2D(int largeur, int hauteur);
@@ -17,8 +17,8 @@ Tunite *creeTour(int posx, int posy);
 Tunite *creeTourRoi(int posx, int posy);
 
 
-Bool tourRoiDetruite(TListePlayer player);
-void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu);
+bool tourRoiDetruite(TListePlayer player);
+void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, int whichPlayer);
 
 TListePlayer quiEstAPortee(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
 TListePlayer combat(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
@@ -29,9 +29,9 @@ Tunite *creeGargouille(int posx, int posy);
 Tunite *creeDragon(int posx, int posy);
 Tunite *creeChevalier(int posx, int posy);
 
-Void supprimerUnite(TListePlayer *player, Tunite *UniteDetruite);
+void supprimerUnite(TListePlayer *player, Tunite *UniteDetruite);
 Tunite AcheteUnite(int *elixirEnStockduJoueur);
-Void AjouterUnite(TListePlayer *player, Tunite *nouvelleUnite);
+void AjouterUnite(TListePlayer *player, Tunite *nouvelleUnite);
 
 
 

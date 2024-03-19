@@ -2,16 +2,16 @@
 #define LISTEDOUBLE_H_INCLUDED
 
 #include <stdbool.h>
-
+#include "type.h"
 /********** Basic Get / Set *************/
 
 T_List getNextCell(T_List l);
 T_List getPrevCell(T_List l);
-int* getData(T_List l);
+Tunite* getData(T_List l);
 
-void setNextCell(T_List l);
-void setPrevCell(T_List l);
-void setData(T_List l);
+void setNextCell(T_List l1, T_List l2);
+void setPrevCell(T_List l1, T_List l2);
+void setData(T_List l, Tunite* mydata);
 
 /********** Basic functions *************/
 
@@ -31,9 +31,9 @@ void swapData( T_List source, T_List destination );
 
 /********** Add/Remove in List *************/
 
-T_List addFirst(T_List l, int mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
-T_List addLast(T_List l, int mydata);
-T_List addAtN(T_List l, int pos, int mydata);
+T_List addFirst(T_List l, Tunite mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
+T_List addLast(T_List l, Tunite mydata);
+T_List addAtN(T_List l, int pos, Tunite mydata);
 
 T_List delFirst(T_List l);
 T_List delLast(T_List l);

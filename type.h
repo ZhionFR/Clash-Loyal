@@ -1,12 +1,6 @@
 #ifndef TYPE_H_INCLUDED
 #define TYPE_H_INCLUDED
-
-typedef struct T_Cell{
-    struct T_Cell *next;
-    struct T_Cell *prev;
-    Tunite *pdata;              // Be careful to do a malloc before using this
-} T_Cell;
-typedef T_Cell *T_List;
+#include "type.h"
 
 
 typedef enum{tour, tourRoi, archer, chevalier, dragon, gargouille} TuniteDuJeu;
@@ -29,6 +23,16 @@ typedef struct {
 
     int coutEnElixir;
 } Tunite;
+
+
+typedef struct T_Cell{
+    struct T_Cell *next;
+    struct T_Cell *prev;
+    Tunite* pdata;              // Be careful to do a malloc before using this
+} T_Cell;
+typedef T_Cell *T_List;
+
+
 
 typedef T_List *TListePlayer;
 

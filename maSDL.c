@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "maSDL.h"
-#include "clashloyal.h"
+#include "type.h"
 
 void message(char *myTitle, char *myMessage){
         const SDL_MessageBoxButtonData buttons[] = {
