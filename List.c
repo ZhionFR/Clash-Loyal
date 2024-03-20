@@ -83,7 +83,7 @@ T_List addFirst(T_List l, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
     *data = mydata;
-    initList(&getPrevCell(new));
+    initList(getPrevCell(new));
     setData(new, data);
     setNextCell(new,l);
     if(isEmptyList(l))
@@ -96,9 +96,9 @@ T_List addLast(T_List l, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(&getPrevCell(new));
+    initList(getPrevCell(new));
     setData(new, data);
-    initList(&getNextCell(new)));
+    initList(getNextCell(new));
     if (isEmptyList(l))
         return new;
     T_List temp = l;
@@ -120,9 +120,9 @@ T_List addAtN(T_List l, int pos, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(&getPrevCell(new));
+    initList(getPrevCell(new));
     setData(new, data);
-    initList(&getNextCell(new));
+    initList(getNextCell(new));
     T_List temp = l;
     int index = 0;
     while (!isEmptyList(getNextCell(temp)) && index < pos - 1){

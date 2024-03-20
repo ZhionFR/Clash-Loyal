@@ -1223,10 +1223,10 @@
 1710260366 d:\programmation\github\clash-loyal\list.h
 	<stdbool.h>
 
-1710865022 source:d:\programmation\github\clash-loyal\clash-loyal\masdl.c
+1710882833 source:d:\programmation\github\clash-loyal\clash-loyal\masdl.c
 	"SDL.h"
 	"maSDL.h"
-	"clashloyal.h"
+	"type.h"
 
 1710865021 d:\programmation\github\clash-loyal\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1627,4 +1627,17 @@
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
+
+1710882958 source:d:\programmation\github\clash-loyal\clash-loyal\clashloyal.c
+	"clashloyal.h"
+	<stdio.h>
+	<stdlib.h>
+	"type.h"
+	<time.h>
+
+1710948113 source:d:\programmation\github\clash-loyal\clash-loyal\list.c
+	<stdio.h>
+	<stdlib.h>
+	"list.h"
+	"type.h"
 
