@@ -3,7 +3,7 @@
 #include "list.h"
 #include "type.h"
 
-/********** Basic Get / Set *************/
+/********** Basic Getters / Setters *************/
 
 T_List getNextCell(T_List l){
     return l->next;
@@ -43,6 +43,8 @@ bool isEmptyList(T_List l){
     return (l==NULL);
 }
 
+
+
 /********** Action on the pointers *************/
 
 
@@ -72,9 +74,9 @@ int* getIfData(T_List l, int mydata){
 */
 
 void swapData(T_List source, T_List destination ){
-    Tunite* temp = getData(source);
-    setData(source, getData(destination));
-    setData(destination, temp);
+    Tunite* temp = getData(source); // temp = a;
+    setData(source, getData(destination)); // a = b;
+    setData(destination, temp); // b = temp;
 }
 
 /********** Add/Remove in List *************/
@@ -83,62 +85,67 @@ T_List addFirst(T_List l, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
     *data = mydata;
-    initList(getPrevCell(new));
-    setData(new, data);
-    setNextCell(new,l);
+    initList(&new->prev); // Pas possible de faire initList(&getPrevCell(new)); Sinon, utiliser le code commenté ci-dessous.
+// Sinon, T_List prev; prev = getPrevCell(new); initList(&prev);
+    setData(new, data); // Setup the data of the cell
+    setNextCell(new,l); // Setup the pointer new to l
     if(isEmptyList(l))
         return new;
-    setPrevCell(l, new);
+    setPrevCell(l, new); // Setup the pointer l to new (if l!=NULL)
     return new;
 }
+
+//void initPrevCell(T_Cell* l){
+//  initList(&l->prev)
+//}
 
 T_List addLast(T_List l, Tunite mydata){
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(getPrevCell(new));
-    setData(new, data);
-    initList(getNextCell(new));
+    initList(getPrevCell(new)); // Initialize the new cell
+    setData(new, data); // Setup the data of the cell
+    initList(getNextCell(new)); // Initialize the new cell
     if (isEmptyList(l))
         return new;
     T_List temp = l;
-    while (!isEmptyList(getNextCell(temp)))
+    while (!isEmptyList(getNextCell(temp))) // Traverse the list to reach the last cell
         temp = getNextCell(temp);
-    setNextCell(temp, new);
-    setPrevCell(new, temp);
+    setNextCell(temp, new); // Setup the pointer temp to new
+    setPrevCell(new, temp); // Setup the pointer new to temp
     return l;
 }
 
 T_List addAtN(T_List l, int pos, Tunite mydata){
-    if (isEmptyList(l) && pos > 0) {
+    if (isEmptyList(l) && pos > 0) { // Limit condition
         printf("WARNING - addAtN : Non zero Index in NULL List (adding first)\n");
         return addFirst(l, mydata);
     }
-    if (pos == 0) {
+    if (pos == 0) { // Limit condition
         return addFirst(l, mydata);
     }
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(getPrevCell(new));
-    setData(new, data);
-    initList(getNextCell(new));
+    initList(getPrevCell(new)); // Initialize the new cell
+    setData(new, data); // Setup the data of the cell
+    initList(getNextCell(new)); // Initialize the new cell
     T_List temp = l;
     int index = 0;
-    while (!isEmptyList(getNextCell(temp)) && index < pos - 1){
+    while (!isEmptyList(getNextCell(temp)) && index < pos - 1){ // Traverse the list to reach the last cell
         temp = getNextCell(temp);
         index++;
     }
-    if (index < pos - 1) {
+    if (index < pos - 1) { // If pos > len list
         printf("WARNING - addAtN : Index out of Bounds (adding last)\n");
         return addLast(l, mydata);
     }
-    setNextCell(new, getNextCell(temp));
-    if (!isEmptyList(getNextCell(temp))) {
+    setNextCell(new, getNextCell(temp)); // TBD
+    if (!isEmptyList(getNextCell(temp))){
         setPrevCell(getNextCell(temp), new);
     }
-    setNextCell(temp, new);
-    setPrevCell(new, temp);
+    setNextCell(temp, new); // Setup the pointer temp to new
+    setPrevCell(new, temp); // Setup the pointer new to temp
     return l;
 }
 

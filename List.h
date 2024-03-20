@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 #include "type.h"
-/********** Basic Get / Set *************/
+/********** Basic Getters / Setters *************/
 
 T_List getNextCell(T_List l);
 T_List getPrevCell(T_List l);
