@@ -132,7 +132,7 @@ T_List addAtN(T_List l, int pos, Tunite mydata){
     initList(getNextCell(new)); // Initialize the new cell
     T_List temp = l;
     int index = 0;
-    while (!isEmptyList(getNextCell(temp)) && index < pos - 1){ // Traverse the list to reach the last cell
+    while (!isEmptyList(getNextCell(temp)) && index < pos - 1){ // Traverse the list to reach the Nth cell
         temp = getNextCell(temp);
         index++;
     }
@@ -161,17 +161,17 @@ T_List delFirst(T_List l){
 }
 
 T_List delLast(T_List l){
-    if (isEmptyList(l)){
+    if (isEmptyList(l)){ // Limit condition
         printf("WARNING - delLast : List already empty.\n");
         return NULL;
     }
-    if (isEmptyList(getNextCell(l))){
+    if (isEmptyList(getNextCell(l))){ // Limit condition
         free(getData(l));
         free(l);
         return NULL;
     }
     T_List temp = l;
-    while (!isEmptyList(getNextCell(getNextCell(temp))))
+    while (!isEmptyList(getNextCell(getNextCell(temp)))) // Traverse the list to reach the last cell
         temp = getNextCell(temp);
     free(getData(getNextCell(temp)));
     free(getNextCell(temp));
@@ -180,20 +180,20 @@ T_List delLast(T_List l){
 }
 
 T_List delAtN(T_List l, int pos){
-    if (isEmptyList(l) && pos > 0) {
+    if (isEmptyList(l) && pos > 0) { // Limit condition
         printf("WARNING - delAtN : Non zero Index in NULL List (deleting first)\n");
         return NULL;
     }
-    if (pos == 0) {
+    if (pos == 0) { // Limit condition
         return delFirst(l);
     }
     T_List temp = l;
     int index = 0;
-    while (!isEmptyList(getNextCell(temp)) && index < pos){
+    while (!isEmptyList(getNextCell(temp)) && index < pos){ // Traverse the list to reach the Nth cell
         temp = getNextCell(temp);
         index++;
     }
-    if (index < pos) {
+    if (index < pos){ // If pos > len list
         printf("WARNING - delAtN : Index out of Bounds (deleting last)\n");
         return delLast(l);
     }
@@ -206,11 +206,11 @@ T_List delAtN(T_List l, int pos){
 /********** Others *************/
 
 int getNbCell(T_List l){
-    if (isEmptyList(l))
+    if (isEmptyList(l)) // Limit condition
         return 0;
     l = getFirstCell(l);
     int n = 1;
-    while(!isEmptyList(getNextCell(l))){
+    while(!isEmptyList(getNextCell(l))){ // Traverse the list
         n++;
         l = getNextCell(l);
     }
@@ -226,16 +226,16 @@ int getSizeBytes(T_List l){
 T_List creatNewListeFromFusion(T_List l1, T_List l2){
     T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
     new = l1;
-    while(!isEmptyList(getNextCell(new)))
+    while(!isEmptyList(getNextCell(new))) // Traverse the l1 list to reach the last cell
         new = getNextCell(new);
     setNextCell(new, l2);
     return new;
 }
 
 T_List addBehind(T_List l1, T_List l2){
-    if (isEmptyList(l1))
+    if (isEmptyList(l1)) // Limit condition
         return l2;
-    if (isEmptyList(l2))
+    if (isEmptyList(l2)) // Limit condition
         return l1;
     T_List lastCellL1 = getLastCell(l1);
     setNextCell(lastCellL1, l2);
