@@ -126,17 +126,17 @@ void setElixirCost(Tunite* unit, int elixircost){
 
 Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, float atkDelay, int damage, int range, float movementSpeed, int posX, int posY, int elixirCost){
     Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
-    nouv->nom = name;
-    nouv->cibleAttaquable = target;
-    nouv->maposition = targetCategory;
-    nouv->pointsDeVie = MaxHP;
-    nouv->vitesseAttaque = atkDelay;
-    nouv->degats = damage;
-    nouv->portee = range;
-    nouv->vitessedeplacement = movementSpeed;
-    nouv->posX = posX;
-    nouv->posY = posY;
-    nouv->coutEnElixir = elixirCost;
+    setUnitName(nouv, name);
+    setUnitTarget(nouv, target);
+    setTargetCategory(nouv, targetCategory);
+    setHPLeft(nouv, MaxHP);
+    setAttackDelay(nouv, atkDelay);
+    setDamage(nouv, damage);
+    setRange(nouv, range);
+    setMoveSpeed(nouv, movementSpeed);
+    setPosX(nouv, posX);
+    setPosY(nouv, posY);
+    setElixirCost(nouv, elixirCost);
     return nouv;
 }
 
