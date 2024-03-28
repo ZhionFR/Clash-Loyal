@@ -13,22 +13,14 @@
  - [ ] Main
    - [ ] .c
 
-### Attack phase
+### Update Game phase
  - [ ] Bool tourRoiDetruite(TListePlayer player);
- - [ ] TListePlayer quiEstAPortee(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
-   - [ ] (Not Required) sort by AtkSpeed
- - [ ] TListePlayer combat(TListePlayer player, Tunite *uneUniteDeLautreJoueur);
- - [ ] Void supprimerUnite(TListePlayer *player, Tunite *UniteDetruite);
+ - [ ] updateUnit subfunctions (0/3)
 
-### Move phase
- - [ ] void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu);
 
 ### Create Phase
  - [ ] Tunite AcheteUnite(int *elixirEnStockduJoueur);
-   - [X] Tunite *creeArcher(int posx, int posy);
-   - [X] Tunite *creeGargouille(int posx, int posy);
-   - [X] Tunite *creeDragon(int posx, int posy);
-   - [X] Tunite *creeChevalier(int posx, int posy);
+   - [X] *createUnit
  - [ ] Void AjouterUnite(TListePlayer *player, Tunite *nouvelleUnite);
 
 ### Menu-ing
