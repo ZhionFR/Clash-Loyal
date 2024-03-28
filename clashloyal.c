@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include "type.h"
 #include <time.h>
-
+#pragma GCC diagnostic ignored "-Wimplicit-int"
+#pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 /**************** Tab alloc/display ****************/
 
 TplateauJeu AlloueTab2D(int largeur, int hauteur){
@@ -85,6 +86,19 @@ int getPosY(Tunite* unit){
 int getElixirCost(Tunite* unit){
     return unit->coutEnElixir;
 }
+int getTarget(Tunite* unit, Tunite* cible){ // cible est la variable qu'on voudrati renvoyer si on etait sur d'avoir une cible,
+                                            // mais on doit renvoyer un int pour savoir si on en a une donc on passe cible en argument
+                                            // et on la modifiera lors du get tout en renvoyant 0 si elle existe et 1 sinon
+    if (unit->Target==NULL){
+        cible = NULL;
+        return 1;
+    }else{
+        cible = unit->Target;
+        return 0;
+    }
+}
+
+
 
 /****************** Set functions ******************/
 
@@ -107,7 +121,7 @@ void setDamage(Tunite* unit, int dmg){
     unit->degats = dmg;
 }
 void setRange(Tunite* unit, int range){
-    unit->portee, range;
+    unit->portee = range;
 }
 void setMoveSpeed(Tunite* unit, int movespeed){
     unit->vitessedeplacement = movespeed;
@@ -121,6 +135,11 @@ void setPosY(Tunite* unit, int posy){
 void setElixirCost(Tunite* unit, int elixircost){
     unit->coutEnElixir = elixircost;
 }
+void setTarget(Tunite* unit, Tunite* cible){
+    unit->Target =  cible;
+}
+
+
 
 /****************** Creating Units ******************/
 
@@ -139,7 +158,7 @@ Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int M
     setElixirCost(nouv, elixirCost);
     return nouv;
 }
-
+        /// MODIFIER LES DELAIS D'ATTAQUES EN NOMBRES DE TICKS ///
 Tunite *creeTour(posx, posy){
     return createUnit(tour, solEtAir, sol, 500, 1.0, 100, 3, 0, posx, posy, 0);
 }
@@ -159,11 +178,143 @@ Tunite *creeGargouille(posx, posy){
     return createUnit(gargouille, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);
 }
 
+/****************** Updating Game ******************/
 
+void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enemyPlayerList, int time){
+    // SI (Cible a portee && Cible vivante)
+    //      SI (il est temps d'attaquer)
+    //          Attaquer(Cible)
+    // SINON SI (Nouvelle cible trouvee)
+    //      Cible = Nouvelle cible
+    //      SI (il est temps d'attaquer)
+    //          Attaquer(Cible)
+    // SINON
+    //      SI (il est temps de bouger)
+    //          Deplacer Unite
+    Tunite* target = NULL;
+    int hp;
+    int atkDelay = getAttackDelay(&unit);
+    int doesTargetExist = getTarget(&unit, target);
+    if (doesTargetExist){
+        if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
+            hp = getHPLeft(target) - getDamage(&unit);
+            if (hp<=0){
+                killUnite(*target);
+                target = NULL;
+            }else {
+                setHPLeft(target, hp);
+            }
+        }
+    }else{
+        getNewTarget(unit, enemyPlayerList, target);
+        if (doesTargetExist){
+            if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
+                hp = getHPLeft(target) - getDamage(&unit);
+                if (hp<=0){
+                    killUnite(*target);
+                    target = NULL;
+                }else {
+                    setHPLeft(target, hp);
+                }
+            }
+        }else{
+            if(time%3){ // on bouge tt les 3 ticks, à changer si on change la vitesse des ticks obviously ;)
+                moveUnit(jeu, unit);
+            }
+        }
+    }
+}
 
-void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, int whichPlayer){
+void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
+    // change target si trouvé sinon target = NULL
+}
+
+void killUnit(Tunite unit){
+    // remove unit from plateauJeu & TlistePlayer
+}
+
+void moveUnit(TplateauJeu jeu, Tunite unit){
 
 }
+
+// Obsolete, a utiliser pour moveUnit
+/*
+void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, int whichPlayer){
+    Tunite* unit;
+    TListePlayer current = *player;
+    int i, nbmovedone, posx, posy, randnum, doesItFly = 0;
+    int len = lenList(player);
+    srand(time(NULL));
+    for (i=0;i<len;i++){
+        unit = getData(*player);
+        if (getTargetCategory(unit)==air){
+            doesItFly = 1;
+        }
+        posx = getPosX(&unit);
+        posy = getPosY(&unit);
+        for (nbmovedone=0; nbmovedone<getMoveSpeed(&unit);nbmovedone++){
+            randnum = rand()%2;
+            if (whichPlayer==1){
+                if(doesItFly){
+                    if (posy!=8){
+                        if (randnum == 0){
+                                if (posx>5){
+                                    moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la gauche si l'unite est a droite
+                                }else{
+                                    if (posx>5) {
+                                        moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la droite si l'unite est a gauche
+                                    }
+                                }
+                        } else {
+                            moveUnit(jeu, *unit, posx, posy+1); // On deplace vers le haut
+                        }
+                    }else{
+                            if (posx>5){
+                                moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la gauche si l'unite est a droite
+                            }else{
+                                if (posx>5) {
+                                    moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la droite si l'unite est a gauche
+                                }
+                            }
+                    }
+                }
+            }
+        }
+    current = getNextCell(player);
+    }
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

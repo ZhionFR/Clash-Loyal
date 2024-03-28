@@ -17,6 +17,7 @@ typedef struct {
     int degats;
     int portee ;			//en mètre, distance sur laquelle on peut atteindre une
                             //cible
+    struct Tunite *Target;
 
     float vitessedeplacement;	//en m/s
     int posX, posY;			//position sur le plateau de jeu
