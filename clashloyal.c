@@ -199,7 +199,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
         if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
             hp = getHPLeft(target) - getDamage(&unit);
             if (hp<=0){
-                killUnite(*target);
+                killUnit(*target);
                 target = NULL;
             }else {
                 setHPLeft(target, hp);
@@ -211,7 +211,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
             if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
                 hp = getHPLeft(target) - getDamage(&unit);
                 if (hp<=0){
-                    killUnite(*target);
+                    killUnit(*target);
                     target = NULL;
                 }else {
                     setHPLeft(target, hp);
