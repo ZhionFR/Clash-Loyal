@@ -1,12 +1,11 @@
-
 #include "clashloyal.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "type.h"
 #include <time.h>
-#include <cjson/cJSON.h>
 #pragma GCC diagnostic ignored "-Wimplicit-int"
 #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
+
 /**************** Tab alloc/display ****************/
 
 TplateauJeu AlloueTab2D(int largeur, int hauteur){
@@ -35,8 +34,7 @@ void initPlateauAvecNULL(TplateauJeu jeu,int largeur, int hauteur){
 }
 
 void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
-    //pour un affichage sur la console, e
-    n relation avec enum TuniteDuJeu
+    //pour un affichage sur la console, en relation avec enum TuniteDuJeu
     const char* InitialeUnite[6]={"T", "R", "A", "C", "D", "G"};
 
     printf("\n");
@@ -227,16 +225,75 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
     }
 }
 
+/*************** GetNewTarget ***************/
+int dist(int Xa, int Ya, int Xb, int Yb){
+    int d = (Xa-Xb)*(Xa-Xb)+(Ya-Xb)*(Ya-Xb);
+    return sqrt(d);
+}
+
 void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
-    // change target si trouvé sinon target = NULL
+    int i = 0, n = lenList(enemyPlayer);
+    TListePlayer current;
+    int posX, posY, CposX, CposY, maxRange, d;
+    posX = getPosX(&unit);
+    posY = getPosY(&unit);
+    maxRange = getRange(&unit);
+    int loop = 0;
+    while(loop){
+        d = dist(posX, posY, CposX, CposY);
+        if (dist<maxRange){
+            target = getData(current);
+            loop = 1;
+        }else{
+            if(i>n){
+                target = NULL;
+                loop = 1;
+            }else{
+                current = getNextCell(current);
+                i++;
+            }
+        }
+    }
 }
 
 void killUnit(Tunite unit){
     // remove unit from plateauJeu & TlistePlayer
 }
 
-void moveUnit(TplateauJeu jeu, Tunite unit){
+void moveUnitTo(TplateauJeu jeu, Tunite unit, int posX, int posY){ // type void -> int to add verif if split flying/not
+    int prevPosX = getPosX(&unit);
+    int prevPosY = getPosY(&unit);
+    jeu[prevPosX][prevPosY] = NULL;
+    jeu[posX][posY] = &unit;
+    setPosX(&unit, posX);
+    setPosY(&unit, posY);
+}
 
+void moveUnit(TplateauJeu jeu, Tunite unit){
+    srand(time(NULL));
+    int i, n = getMoveSpeed(&unit);
+    int randint = rand()%2;
+    int posX = getPosX(&unit);
+    int posY = getPosY(&unit);
+    for (i=0;i<n;i++){
+        if (randint){
+            if (jeu[posX+1][posY]==NULL){
+                moveUnitTo(jeu, unit, posX+1, posY);
+            }else{
+                if (jeu[posX][posY+1]==NULL){
+                    moveUnitTo(jeu, unit, posX, posY+1);
+                }
+            }
+        }else{
+            if (jeu[posX][posY+1]==NULL){
+                moveUnitTo(jeu, unit, posX, posY+1);
+            }else{
+                if (jeu[posX+1][posY]==NULL){
+                    moveUnitTo(jeu, unit, posX+1, posY);
+                }
+            }
+        }
+    }
 }
 
 // Obsolete, a utiliser pour moveUnit
