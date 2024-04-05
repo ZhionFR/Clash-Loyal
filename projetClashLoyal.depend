@@ -786,7 +786,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1712303252 c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.h
+1712303761 c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.h
 	"type.h"
 	<stdbool.h>
 
@@ -806,7 +806,7 @@
 	"maSDL.h"
 	"type.h"
 
-1711616172 source:c:\users\tommi\onedrive\documents\github\clash-loyal\list.c
+1712303545 source:c:\users\tommi\onedrive\documents\github\clash-loyal\list.c
 	<stdio.h>
 	<stdlib.h>
 	"list.h"

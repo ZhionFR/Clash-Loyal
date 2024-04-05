@@ -178,6 +178,14 @@ Tunite *creeGargouille(posx, posy){
     return createUnit(gargouille, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);  // 0.6 att/s -> 2 ticks
 }
 
+void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite unit){
+    int posX = getPosX(&unit);
+    int posY = getPosY(&unit);
+    jeu[posX][posY] = &unit;
+    playerList = addLast(playerList, unit);
+}
+
+
 /****************** Updating Game ******************/
 
 void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enemyPlayerList, int time){
@@ -199,7 +207,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
         if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
             hp = getHPLeft(target) - getDamage(&unit);
             if (hp<=0){
-                killUnit(*target);
+                killUnit(*target, enemyPlayerList);
                 target = NULL;
             }else {
                 setHPLeft(target, hp);
@@ -211,7 +219,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
             if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
                 hp = getHPLeft(target) - getDamage(&unit);
                 if (hp<=0){
-                    killUnit(*target);
+                    killUnit(*target, enemyPlayerList);
                     target = NULL;
                 }else {
                     setHPLeft(target, hp);
@@ -232,7 +240,7 @@ int dist(int Xa, int Ya, int Xb, int Yb){
 }
 
 void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
-    int i = 0, n = lenList(enemyPlayer);
+    int i = 0, n = getNbCell(enemyPlayer);
     TListePlayer current;
     int posX, posY, CposX, CposY, maxRange, d;
     posX = getPosX(&unit);
@@ -256,9 +264,11 @@ void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
     }
 }
 
-void killUnit(Tunite unit){
+void killUnit(Tunite unit, TListePlayer playerList){
     // remove unit from plateauJeu & TlistePlayer
 }
+
+/***************** MoveUnit *****************/
 
 void moveUnitTo(TplateauJeu jeu, Tunite unit, int posX, int posY){ // type void -> int to add verif if split flying/not
     int prevPosX = getPosX(&unit);
@@ -296,54 +306,6 @@ void moveUnit(TplateauJeu jeu, Tunite unit){
     }
 }
 
-// Obsolete, a utiliser pour moveUnit
-/*
-void PositionnePlayerOnPlateau(TListePlayer player, TplateauJeu jeu, int whichPlayer){
-    Tunite* unit;
-    TListePlayer current = *player;
-    int i, nbmovedone, posx, posy, randnum, doesItFly = 0;
-    int len = lenList(player);
-    srand(time(NULL));
-    for (i=0;i<len;i++){
-        unit = getData(*player);
-        if (getTargetCategory(unit)==air){
-            doesItFly = 1;
-        }
-        posx = getPosX(&unit);
-        posy = getPosY(&unit);
-        for (nbmovedone=0; nbmovedone<getMoveSpeed(&unit);nbmovedone++){
-            randnum = rand()%2;
-            if (whichPlayer==1){
-                if(doesItFly){
-                    if (posy!=8){
-                        if (randnum == 0){
-                                if (posx>5){
-                                    moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la gauche si l'unite est a droite
-                                }else{
-                                    if (posx>5) {
-                                        moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la droite si l'unite est a gauche
-                                    }
-                                }
-                        } else {
-                            moveUnit(jeu, *unit, posx, posy+1); // On deplace vers le haut
-                        }
-                    }else{
-                            if (posx>5){
-                                moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la gauche si l'unite est a droite
-                            }else{
-                                if (posx>5) {
-                                    moveUnit(jeu, *unit, posx-1, posy); //On deplace vers la droite si l'unite est a gauche
-                                }
-                            }
-                    }
-                }
-            }
-        }
-    current = getNextCell(player);
-    }
-}
-
-*/
 
 
 

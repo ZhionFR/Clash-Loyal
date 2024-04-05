@@ -267,12 +267,4 @@ int getOccurences(T_List l, int data){
 }
 */
 
-int lenList(T_List l){
-    int n = 0;
-    while (!isEmptyList(l)){
-        n++;
-        l = getNextCell(l);
-    }
-    return n;
-}
 

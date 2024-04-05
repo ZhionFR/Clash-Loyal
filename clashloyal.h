@@ -53,6 +53,8 @@ Tunite *creeArcher(posx, posy);
 Tunite *creeDragon(posx, posy);
 Tunite *creeGargouille(posx, posy);
 
+void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite unit);
+
 /****************** Updating Game ******************/
 
 void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enemyPlayerList, int time);
@@ -61,7 +63,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
 int dist(int Xa, int Ya, int Xb, int Yb);
 void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target);
 
-void killUnit(Tunite unit);
+void killUnit(Tunite unit, TListePlayer playerList);
 
 void moveUnit(TplateauJeu jeu, Tunite unit);
 
