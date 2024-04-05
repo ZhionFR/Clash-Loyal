@@ -207,7 +207,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
         if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
             hp = getHPLeft(target) - getDamage(&unit);
             if (hp<=0){
-                killUnit(*target, enemyPlayerList);
+                enemyPlayerList = killUnit(*target, enemyPlayerList, jeu);
                 target = NULL;
             }else {
                 setHPLeft(target, hp);
@@ -219,7 +219,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
             if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
                 hp = getHPLeft(target) - getDamage(&unit);
                 if (hp<=0){
-                    killUnit(*target, enemyPlayerList);
+                    enemyPlayerList = killUnit(*target, enemyPlayerList, jeu);
                     target = NULL;
                 }else {
                     setHPLeft(target, hp);
@@ -266,12 +266,31 @@ void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
 
 /***************** KillUnit *****************/
 
-Tunite* findUnit(TListePlayer playerList, int posX, int posY){
-
+int findUnitIndex(TListePlayer playerList, int posX, int posY){ // exeption non geree car on cherche normalement une unite qui est dans la liste
+    TListePlayer current = playerList;
+    int loop = 0;
+    int i = 0;
+    Tunite* unit;
+    while (loop){
+        unit = getData(current);
+        if (posX==getPosX(unit)){
+            if (posY==getPosY(unit)){
+                return i;
+            }
+        }else{
+            current = getNextCell(current);
+            i++;
+        }
+    }
 }
 
-void killUnit(Tunite unit, TListePlayer playerList){
-    // remove unit from plateauJeu & TlistePlayer
+TListePlayer killUnit(Tunite unit, TListePlayer playerList, TplateauJeu jeu){
+    int posX = getPosX(&unit);
+    int posY = getPosY(&unit);
+    int ind;
+    ind = findUnitIndex(playerList, posX, posY);
+    playerList = delAtN(playerList, ind);
+    jeu[posX][posY] = NULL;
 }
 
 /***************** MoveUnit *****************/

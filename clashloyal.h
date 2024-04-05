@@ -63,7 +63,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
 int dist(int Xa, int Ya, int Xb, int Yb);
 void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target);
 
-void killUnit(Tunite unit, TListePlayer playerList);
+TListePlayer killUnit(Tunite unit, TListePlayer playerList, TplateauJeu jeu);
 
 void moveUnit(TplateauJeu jeu, Tunite unit);
 
