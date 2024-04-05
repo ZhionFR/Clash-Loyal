@@ -7,9 +7,24 @@
 			<Cursor1 position="497" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="clashloyal.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7164" topLine="186" />
+			<Cursor1 position="3510" topLine="72" />
+		</Cursor>
+	</File>
+	<File name="List.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2521" topLine="103" />
+		</Cursor>
+	</File>
+	<File name="clashloyal.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2298" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="clashloyal.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7265" topLine="228" />
 		</Cursor>
 	</File>
 	<File name="maSDL.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -20,21 +35,6 @@
 	<File name="type.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="711" topLine="9" />
-		</Cursor>
-	</File>
-	<File name="clashloyal.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1046" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="List.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2521" topLine="103" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3510" topLine="72" />
 		</Cursor>
 	</File>
 	<File name="List.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
