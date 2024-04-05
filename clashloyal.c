@@ -143,7 +143,10 @@ void setTarget(Tunite* unit, Tunite* cible){
 
 /****************** Creating Units ******************/
 
-Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, float atkDelay, int damage, int range, float movementSpeed, int posX, int posY, int elixirCost){
+void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir);
+
+
+Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, int atkDelay, int damage, int range, int movementSpeed, int posX, int posY, int elixirCost){
     Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
     setUnitName(nouv, name);
     setUnitTarget(nouv, target);
