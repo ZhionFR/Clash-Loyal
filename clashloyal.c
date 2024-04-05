@@ -5,10 +5,6 @@
 #include "type.h"
 #include <time.h>
 #include <cjson/cJSON.h>
-<<<<<<< Updated upstream
-=======
-#include <math.h>
->>>>>>> Stashed changes
 #pragma GCC diagnostic ignored "-Wimplicit-int"
 #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 /**************** Tab alloc/display ****************/
@@ -230,35 +226,9 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
         }
     }
 }
-/*************** GetNewTarget ***************/
-int dist(int Xa, int Ya, int Xb, int Yb){
-    int d = (Xa-Xb)*(Xa-Xb)+(Ya-Xb)*(Ya-Xb);
-    return sqrt(d);
-}
 
 void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
-    int i = 0, n = lenList(enemyPlayer);
-    TListePlayer current;
-    int posX, posY, CposX, CposY, maxRange, d;
-    posX = getPosX(&unit);
-    posY = getPosY(&unit);
-    maxRange = getRange(&unit);
-    int loop = 0;
-    while(loop){
-        d = dist(posX, posY, CposX, CposY);
-        if (dist<maxRange){
-            target = getData(current);
-            loop = 1;
-        }else{
-            if(i>n){
-                target = NULL;
-                loop = 1;
-            }else{
-                current = getNextCell(current);
-                i++;
-            }
-        }
-    }
+    // change target si trouvé sinon target = NULL
 }
 
 void killUnit(Tunite unit){

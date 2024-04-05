@@ -401,14 +401,14 @@
 	"maSDL.h"
 	"clashloyal.h"
 
-1711620631 source:c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.c
+1711612430 source:c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.c
 	"clashloyal.h"
 	<stdio.h>
 	<stdlib.h>
 	"type.h"
 	<time.h>
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -445,12 +445,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_main.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_stdinc.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -479,28 +479,28 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_config.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 	<winsdkver.h>
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_platform.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\begin_code.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\begin_code.h
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\close_code.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\close_code.h
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_assert.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_atomic.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
@@ -508,7 +508,7 @@
 	<mbarrier.h>
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_audio.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -518,12 +518,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_error.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_endian.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<endian.h>
@@ -532,13 +532,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_mutex.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_thread.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -549,18 +549,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_rwops.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_clipboard.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -580,7 +580,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_events.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -594,7 +594,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_video.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -602,13 +602,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_pixels.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_rect.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -616,7 +616,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_surface.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -625,11 +625,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_blendmode.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_keyboard.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -637,27 +637,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_keycode.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_scancode.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_mouse.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_joystick.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -666,17 +666,17 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_sensor.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_sensor.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_quit.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_gesture.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -684,70 +684,70 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_touch.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_filesystem.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_haptic.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_hidapi.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_hidapi.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_hints.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_loadso.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_log.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_messagebox.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_metal.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_metal.h
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_power.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_render.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_shape.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -756,7 +756,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_system.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -764,33 +764,33 @@
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_timer.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_version.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_locale.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_locale.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_misc.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\sdl2\x86_64-w64-mingw32\include\sdl2\sdl_misc.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1711613487 c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.h
+1711609887 c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.h
 	"type.h"
 	<stdbool.h>
 
-1710869070 source:c:\users\tommi\onedrive\documents\github\clash-loyal\main.c
+1710865470 source:c:\users\tommi\onedrive\documents\github\clash-loyal\main.c
 	"SDL.h"
 	"maSDL.h"
 	"clashloyal.h"
@@ -798,21 +798,21 @@
 	<stdlib.h>
 	<time.h>
 
-1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\masdl.h
+1710864952 c:\users\tommi\onedrive\documents\github\clash-loyal\masdl.h
 	"clashloyal.h"
 
-1711613487 source:c:\users\tommi\onedrive\documents\github\clash-loyal\masdl.c
+1711609887 source:c:\users\tommi\onedrive\documents\github\clash-loyal\masdl.c
 	"SDL.h"
 	"maSDL.h"
 	"type.h"
 
-1711616172 source:c:\users\tommi\onedrive\documents\github\clash-loyal\list.c
+1711612572 source:c:\users\tommi\onedrive\documents\github\clash-loyal\list.c
 	<stdio.h>
 	<stdlib.h>
 	"list.h"
 	"type.h"
 
-1711613487 c:\users\tommi\onedrive\documents\github\clash-loyal\list.h
+1711609887 c:\users\tommi\onedrive\documents\github\clash-loyal\list.h
 	<stdbool.h>
 	"type.h"
 
@@ -1645,6 +1645,6 @@
 	"list.h"
 	"type.h"
 
-1711619677 c:\users\tommi\onedrive\documents\github\clash-loyal\type.h
+1711616077 c:\users\tommi\onedrive\documents\github\clash-loyal\type.h
 	"type.h"
 
