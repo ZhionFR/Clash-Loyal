@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "type.h"
 #include <time.h>
+#include <cjson/cJSON.h>
 #pragma GCC diagnostic ignored "-Wimplicit-int"
 #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 /**************** Tab alloc/display ****************/
@@ -34,7 +35,8 @@ void initPlateauAvecNULL(TplateauJeu jeu,int largeur, int hauteur){
 }
 
 void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
-    //pour un affichage sur la console, en relation avec enum TuniteDuJeu
+    //pour un affichage sur la console, e
+    n relation avec enum TuniteDuJeu
     const char* InitialeUnite[6]={"T", "R", "A", "C", "D", "G"};
 
     printf("\n");
@@ -158,24 +160,24 @@ Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int M
     setElixirCost(nouv, elixirCost);
     return nouv;
 }
-        /// MODIFIER LES DELAIS D'ATTAQUES EN NOMBRES DE TICKS ///
+
 Tunite *creeTour(posx, posy){
-    return createUnit(tour, solEtAir, sol, 500, 1.0, 100, 3, 0, posx, posy, 0);
+    return createUnit(tour, solEtAir, sol, 500, 1.0, 100, 3, 0, posx, posy, 0);  // 1 att/s -> 3 ticks
 }
 Tunite *creeTourRoi(posx, posy){
-    return createUnit(tourRoi, solEtAir, sol, 800, 1.2, 120, 4, 0, posx, posy, 0);
+    return createUnit(tourRoi, solEtAir, sol, 800, 1.2, 120, 4, 0, posx, posy, 0);  // 1.2 att/s -> 4 ticks
 }
 Tunite *creeChevalier(posx, posy){
-    return createUnit(chevalier, sol, sol, 400, 1.5, 250, 1, 2.0, posx, posy, 4);
+    return createUnit(chevalier, sol, sol, 400, 5, 250, 1, 2.0, posx, posy, 4); // 1.5 att/s -> 5 ticks
 }
 Tunite *creeArcher(posx, posy){
-    return createUnit(archer, solEtAir, sol, 80, 0.7, 120, 3, 1.0, posx, posy, 2);
+    return createUnit(archer, solEtAir, sol, 80, 0.7, 120, 3, 1.0, posx, posy, 2);  // 0.7 att/s -> 2 ticks
 }
 Tunite *creeDragon(posx, posy){
-    return createUnit(dragon, solEtAir, air, 200, 1.1, 70, 2, 2.0, posx, posy, 3);
+    return createUnit(dragon, solEtAir, air, 200, 1.1, 70, 2, 2.0, posx, posy, 3); // 1.2 att/s -> 4 ticks
 }
 Tunite *creeGargouille(posx, posy){
-    return createUnit(gargouille, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);
+    return createUnit(gargouille, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);  // 0.6 att/s -> 2 ticks
 }
 
 /****************** Updating Game ******************/
