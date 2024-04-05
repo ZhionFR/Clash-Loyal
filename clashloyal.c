@@ -5,7 +5,10 @@
 #include "type.h"
 #include <time.h>
 #include <cjson/cJSON.h>
+<<<<<<< Updated upstream
+=======
 #include <math.h>
+>>>>>>> Stashed changes
 #pragma GCC diagnostic ignored "-Wimplicit-int"
 #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 /**************** Tab alloc/display ****************/
@@ -27,7 +30,7 @@ void initPlateauAvecNULL(TplateauJeu jeu,int largeur, int hauteur){
     }
 
     //POUR LA DEMO D'AFFICHAGE UNIQUEMENT, A SUPPRIMER
-    //(les tours ici ne sont pas liÃ©es aux listes des unitÃ©s de vos joueurs)
+    //(les tours ici ne sont pas liées aux listes des unités de vos joueurs)
     jeu[5][3]=creeTour(5,3);
     jeu[5][1]=creeTourRoi(5,1);
     jeu[5][15]=creeTour(5,15);
@@ -47,7 +50,7 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
             if (jeu[i][j] != NULL){
                     printf("%s",InitialeUnite[jeu[i][j]->nom]);
             }
-            else printf(" ");  //cad pas d'unitÃ© sur cette case
+            else printf(" ");  //cad pas d'unité sur cette case
         }
         printf("\n");
     }
@@ -221,7 +224,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
                 }
             }
         }else{
-            if(time%3){ // on bouge tt les 3 ticks, Ã  changer si on change la vitesse des ticks obviously ;)
+            if(time%3){ // on bouge tt les 3 ticks, à changer si on change la vitesse des ticks obviously ;)
                 moveUnit(jeu, unit);
             }
         }
