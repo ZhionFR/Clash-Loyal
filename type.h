@@ -13,13 +13,13 @@ typedef struct {
     Tcible maposition;		//indique soit « air » soit « sol », utile pour savoir
                             //qui peut nous attaquer
     int pointsDeVie;
-    float vitesseAttaque;	//en seconde, plus c’est petit plus c’est rapide
+    int vitesseAttaque;	//en nb de ticks, plus c’est petit plus c’est rapide
     int degats;
     int portee ;			//en mètre, distance sur laquelle on peut atteindre une
                             //cible
     struct Tunite *Target;
 
-    float vitessedeplacement;	//en m/s
+    int vitessedeplacement;	//en m/s
     int posX, posY;			//position sur le plateau de jeu
 
     int coutEnElixir;

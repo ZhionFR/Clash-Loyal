@@ -160,22 +160,22 @@ Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int M
 }
 
 Tunite *creeTour(posx, posy){
-    return createUnit(tour, solEtAir, sol, 500, 1.0, 100, 3, 0, posx, posy, 0);  // 1 att/s -> 3 ticks
+    return createUnit(tour, solEtAir, sol, 500, 3, 100, 3, 0, posx, posy, 0);  // 1 s/atk -> 3 ticks
 }
 Tunite *creeTourRoi(posx, posy){
-    return createUnit(tourRoi, solEtAir, sol, 800, 1.2, 120, 4, 0, posx, posy, 0);  // 1.2 att/s -> 4 ticks
+    return createUnit(tourRoi, solEtAir, sol, 800, 4, 120, 4, 0, posx, posy, 0);  // 1.2 s/atk -> 4 ticks
 }
 Tunite *creeChevalier(posx, posy){
-    return createUnit(chevalier, sol, sol, 400, 5, 250, 1, 2.0, posx, posy, 4); // 1.5 att/s -> 5 ticks
+    return createUnit(chevalier, sol, sol, 400, 5, 250, 1, 2.0, posx, posy, 4); // 1.5 s/atk -> 5 ticks
 }
 Tunite *creeArcher(posx, posy){
-    return createUnit(archer, solEtAir, sol, 80, 0.7, 120, 3, 1.0, posx, posy, 2);  // 0.7 att/s -> 2 ticks
+    return createUnit(archer, solEtAir, sol, 80, 2, 120, 3, 1.0, posx, posy, 2);  // 0.7 s/atk -> 2 ticks
 }
 Tunite *creeDragon(posx, posy){
-    return createUnit(dragon, solEtAir, air, 200, 1.1, 70, 2, 2.0, posx, posy, 3); // 1.2 att/s -> 4 ticks
+    return createUnit(dragon, solEtAir, air, 200, 4, 70, 2, 2.0, posx, posy, 3); // 1.2 s/atk -> 4 ticks
 }
 Tunite *creeGargouille(posx, posy){
-    return createUnit(gargouille, solEtAir, air, 80, 0.6, 90, 1, 3.0, posx, posy, 1);  // 0.6 att/s -> 2 ticks
+    return createUnit(gargouille, solEtAir, air, 80, 2, 90, 1, 3.0, posx, posy, 1);  // 0.6 s/atk -> 2 ticks
 }
 
 void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite unit){
@@ -262,6 +262,12 @@ void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
             }
         }
     }
+}
+
+/***************** KillUnit *****************/
+
+Tunite* findUnit(TListePlayer playerList, int posX, int posY){
+
 }
 
 void killUnit(Tunite unit, TListePlayer playerList){
