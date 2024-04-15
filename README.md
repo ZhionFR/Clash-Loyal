@@ -31,7 +31,7 @@
 
 
 
-Problemes typage : 
+Problemes typage : \n
 Tunite -> Tunite* dans les fonctions de manipulation de listes
 notement : - addLAst
            - ~addFirst~
