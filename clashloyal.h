@@ -44,18 +44,24 @@ void setTarget(Tunite* unit, Tunite* cible);
 
 /****************** Creating Units ******************/
 
-void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir);
+int isEmptySlot(TplateauJeu jeu, int posx, int posy);
+int findNewUnitPlace(TplateauJeu jeu, int whichplayer, int* posx, int* posy);
+void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir, int whichplayer);
+
+void createTowers(TplateauJeu jeu, TListePlayer* playerList1, TListePlayer* playerList2);
 
 Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, int atkDelay, int damage, int range, int movementSpeed, int posX, int posY, int elixirCost);
 
 Tunite *creeTour(int posx, int posy);
 Tunite *creeTourRoi(int posx, int posy);
-Tunite *creeChevalier(posx, posy);
-Tunite *creeArcher(posx, posy);
-Tunite *creeDragon(posx, posy);
-Tunite *creeGargouille(posx, posy);
+Tunite *creeChevalier(int posx, int posy);
+Tunite *creeArcher(int posx, int posy);
+Tunite *creeDragon(int posx, int posy);
+Tunite *creeGargouille(int posx, int posy);
+Tunite *creeEmpty(int posx, int posy);
 
-void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite unit);
+
+void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite* unit);
 
 /****************** Updating Game ******************/
 
@@ -67,7 +73,7 @@ void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target);
 
 TListePlayer killUnit(Tunite unit, TListePlayer playerList, TplateauJeu jeu);
 
-void moveUnit(TplateauJeu jeu, Tunite unit);
+void moveUnit(TplateauJeu jeu, Tunite unit, int whichplayer);
 
 
 

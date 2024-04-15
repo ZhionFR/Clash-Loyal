@@ -52,18 +52,20 @@ int main(int argc, char* argv[])
         maj_fenetre(pWindow);
 
 
-
-        //A COMMENTER quand vous en aurez assez de cliquer sur ces popups ^^
-
-        //message("Welcome in ClashLoyal","Ceci est un point de depart de votre future interface de votre jeu ClahLoyal");
-        //message("et fin","ECHAP->quitter, S/C ET D/V les gerer les sauvegardes");
-
         /***************************** Variables *****************************/
-
         int time = 0;
         int *player1Elixir, *player2Elixir;
+        #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
         *player1Elixir = 0;
         *player2Elixir = 0;
+        #pragma GCC diagnostic warning "-Wmaybe-uninitialized"
+        TListePlayer playerList1;
+        TListePlayer playerList2;
+        #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
+        initList(&playerList1);
+        initList(&playerList2);
+        #pragma GCC diagnostic warning "-Wimplicit-function-declaration"
+        createTowers(jeu, &playerList1, &playerList2); //  BUG THIS LINE
 
 
         /*********************************************************************/
@@ -76,18 +78,16 @@ int main(int argc, char* argv[])
 
                 /******************************** Jeu ********************************/
 
-                // Update attaques
+                updatePlayer(jeu, playerList1, 1, playerList2, time); // Update P1
+                updatePlayer(jeu, playerList2, 2, playerList1, time); // Update P2
 
                 if (time%3){
-                    // Update positions
-
-                    // Update elexirs
-
-                    // Update achats
-
+                    buyUnit(jeu, playerList1, player1Elixir, 1);
+                    buyUnit(jeu, playerList2, player2Elixir, 2);
                 }
 
                 time += 1;
+                printf("%i\n", time);
                 /*********************************************************************/
                 //affichage du jeu à chaque tour
                 efface_fenetre(pWinSurf);

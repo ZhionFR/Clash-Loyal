@@ -401,7 +401,7 @@
 	"maSDL.h"
 	"clashloyal.h"
 
-1712303241 source:c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.c
+1713187717 source:c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.c
 	"clashloyal.h"
 	<stdio.h>
 	<stdlib.h>
@@ -786,11 +786,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1712305258 c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.h
+1713187458 c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.h
 	"type.h"
 	<stdbool.h>
 
-1710869070 source:c:\users\tommi\onedrive\documents\github\clash-loyal\main.c
+1713187737 source:c:\users\tommi\onedrive\documents\github\clash-loyal\main.c
 	"SDL.h"
 	"maSDL.h"
 	"clashloyal.h"
@@ -806,13 +806,13 @@
 	"maSDL.h"
 	"type.h"
 
-1712303545 source:c:\users\tommi\onedrive\documents\github\clash-loyal\list.c
+1713187116 source:c:\users\tommi\onedrive\documents\github\clash-loyal\list.c
 	<stdio.h>
 	<stdlib.h>
 	"list.h"
 	"type.h"
 
-1711613487 c:\users\tommi\onedrive\documents\github\clash-loyal\list.h
+1713187140 c:\users\tommi\onedrive\documents\github\clash-loyal\list.h
 	<stdbool.h>
 	"type.h"
 
@@ -1645,6 +1645,6 @@
 	"list.h"
 	"type.h"
 
-1712304002 c:\users\tommi\onedrive\documents\github\clash-loyal\type.h
+1713115519 c:\users\tommi\onedrive\documents\github\clash-loyal\type.h
 	"type.h"
 

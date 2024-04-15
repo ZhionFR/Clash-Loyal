@@ -20,12 +20,12 @@ Tunite* getData(T_List l){
     exit(EXIT_FAILURE);
 }
 
-void setNextCell(T_List l1, T_List l2){
-    l1->next = l2;
+void setNextCell(T_List l, T_List newnext){
+    l->next = newnext;
 }
 
-void setPrevCell(T_List l1, T_List l2){
-    l1->prev = l2;
+void setPrevCell(T_List l, T_List newprev){
+    l->prev = newprev;
 }
 
 void setData(T_List l, Tunite* mydata){
@@ -35,7 +35,7 @@ void setData(T_List l, Tunite* mydata){
 /********** Basic functions *************/
 
 // For initializing
-void initList(T_List *l){
+void initList(T_List* l){
     *l=NULL;
 }
 
@@ -60,19 +60,6 @@ T_List getLastCell(T_List l){
     return l;
 }
 
-/* possible ?
-int* getIfData(T_List l, int mydata){
-    l = getFirstCell(l);
-    do {
-        if (*getData(l) == mydata)
-            return getData(l);
-        l = getNextCell(l);
-    } while (!isEmptyList(getNextCell(l)));
-    printf("ERROR - getIfData : Data not in list.\n");
-    exit(EXIT_FAILURE);
-}
-*/
-
 void swapData(T_List source, T_List destination ){
     Tunite* temp = getData(source); // temp = a;
     setData(source, getData(destination)); // a = b;
@@ -81,55 +68,49 @@ void swapData(T_List source, T_List destination ){
 
 /********** Add/Remove in List *************/
 
-T_List addFirst(T_List l, Tunite mydata){
-    Tunite* data = (Tunite*)malloc(sizeof(Tunite));
-    T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
-    *data = mydata;
-    initList(&new->prev); // Pas possible de faire initList(&getPrevCell(new)); Sinon, utiliser le code commenté ci-dessous.
-// Sinon, T_List prev; prev = getPrevCell(new); initList(&prev);
-    setData(new, data); // Setup the data of the cell
-    setNextCell(new,l); // Setup the pointer new to l
-    if(isEmptyList(l))
+T_List addFirst(T_List l, Tunite* mydata){
+    T_List new = (T_List)malloc(sizeof(T_Cell));
+    setData(new, mydata);
+    if (isEmptyList(l)){
         return new;
-    setPrevCell(l, new); // Setup the pointer l to new (if l!=NULL)
+    }
+    setNextCell(new, l);
+    setPrevCell(l, new);
     return new;
 }
 
-//void initPrevCell(T_Cell* l){
-//  initList(&l->prev)
-//}
-
-T_List addLast(T_List l, Tunite mydata){
-    Tunite* data = (Tunite*)malloc(sizeof(Tunite));
-    struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
-    *data = mydata;
-    initList(getPrevCell(new)); // Initialize the new cell
-    setData(new, data); // Setup the data of the cell
-    initList(getNextCell(new)); // Initialize the new cell
-    if (isEmptyList(l))
+T_List addLast(T_List l, Tunite* mydata){
+    T_List new = (T_List)malloc(sizeof(T_Cell));
+    setData(new, mydata);
+    if (isEmptyList(l)){
         return new;
+    }
     T_List temp = l;
-    while (!isEmptyList(getNextCell(temp))) // Traverse the list to reach the last cell
+    while(!isEmptyList(getNextCell(temp))){
         temp = getNextCell(temp);
-    setNextCell(temp, new); // Setup the pointer temp to new
-    setPrevCell(new, temp); // Setup the pointer new to temp
+    }
+    setNextCell(temp, new);
+    setPrevCell(new, temp);
     return l;
 }
 
+/*
 T_List addAtN(T_List l, int pos, Tunite mydata){
     if (isEmptyList(l) && pos > 0) { // Limit condition
         printf("WARNING - addAtN : Non zero Index in NULL List (adding first)\n");
-        return addFirst(l, mydata);
+        return addFirst(l, &mydata);
     }
     if (pos == 0) { // Limit condition
-        return addFirst(l, mydata);
+        return addFirst(l, &mydata);
     }
     Tunite* data = (Tunite*)malloc(sizeof(Tunite));
     struct T_Cell* new = (struct T_Cell*)malloc(sizeof(struct T_Cell));
     *data = mydata;
-    initList(getPrevCell(new)); // Initialize the new cell
+    T_List prevcell = getPrevCell(new);
+    initList(&prevcell); // Initialize the new cell
     setData(new, data); // Setup the data of the cell
-    initList(getNextCell(new)); // Initialize the new cell
+    T_List nextcell = getNextCell(new);
+    initList(&nextcell); // Initialize the new cell
     T_List temp = l;
     int index = 0;
     while (!isEmptyList(getNextCell(temp)) && index < pos - 1){ // Traverse the list to reach the Nth cell
@@ -148,6 +129,9 @@ T_List addAtN(T_List l, int pos, Tunite mydata){
     setPrevCell(new, temp); // Setup the pointer new to temp
     return l;
 }
+*/
+
+
 
 T_List delFirst(T_List l){
     if (isEmptyList(l)){

@@ -3,7 +3,7 @@
 #include "type.h"
 
 
-typedef enum{tour, tourRoi, archer, chevalier, dragon, gargouille} TuniteDuJeu;
+typedef enum{tour, tourRoi, archer, chevalier, dragon, gargouille, Empty} TuniteDuJeu;
 typedef enum{sol, solEtAir, air } Tcible;
 
 
@@ -31,11 +31,12 @@ typedef struct T_Cell{
     struct T_Cell *prev;
     Tunite* pdata;              // Be careful to do a malloc before using this
 } T_Cell;
+
 typedef T_Cell *T_List;
 
 
 
-typedef T_List *TListePlayer;
+typedef T_List TListePlayer;
 
 typedef Tunite* ** TplateauJeu;  ////tableau a deux dimensions de largeur 11 et hauteur 19 contenant des pointeurs (Tunite*)
 

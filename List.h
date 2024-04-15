@@ -31,9 +31,9 @@ void swapData( T_List source, T_List destination );
 
 /********** Add/Remove in List *************/
 
-T_List addFirst(T_List l, Tunite mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
-T_List addLast(T_List l, Tunite mydata);
-T_List addAtN(T_List l, int pos, Tunite mydata);
+T_List addFirst(T_List l, Tunite* mydata); //Bien mettre à NULL les champs suiv et prec non utilisés s'il y en a
+T_List addLast(T_List l, Tunite* mydata);
+// T_List addAtN(T_List l, int pos, Tunite mydata);
 
 T_List delFirst(T_List l);
 T_List delLast(T_List l);

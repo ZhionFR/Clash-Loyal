@@ -23,14 +23,17 @@ void initPlateauAvecNULL(TplateauJeu jeu,int largeur, int hauteur){
             jeu[i][j] = NULL;
         }
     }
-
-    //POUR LA DEMO D'AFFICHAGE UNIQUEMENT, A SUPPRIMER
-    //(les tours ici ne sont pas liées aux listes des unités de vos joueurs)
-    jeu[5][3]=creeTour(5,3);
-    jeu[5][1]=creeTourRoi(5,1);
-    jeu[5][15]=creeTour(5,15);
-    jeu[5][17]=creeTourRoi(5,17);
-    //FIN DEMO AFFICHAGE
+    // la rivière :
+    jeu[0][9]=creeEmpty(0,9);
+    jeu[1][9]=creeEmpty(1,9);
+    jeu[2][9]=creeEmpty(2,9);
+    jeu[3][9]=creeEmpty(3,9);
+    jeu[4][9]=creeEmpty(4,9);
+    jeu[6][9]=creeEmpty(6,9);
+    jeu[7][9]=creeEmpty(7,9);
+    jeu[8][9]=creeEmpty(8,9);
+    jeu[9][9]=creeEmpty(9,9);
+    jeu[10][9]=creeEmpty(10,9);
 }
 
 void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
@@ -143,7 +146,80 @@ void setTarget(Tunite* unit, Tunite* cible){
 
 /****************** Creating Units ******************/
 
-void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir);
+int isEmptySlot(TplateauJeu jeu, int posx, int posy){
+    if (jeu[posx][posy]==NULL){
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
+int findNewUnitPlace(TplateauJeu jeu, int whichplayer, int* posx, int* posy){
+    int x;
+    int y = 3;
+    if (whichplayer==2) y = 15;
+    for (x=3; x<8; x++){
+        if (isEmptySlot(jeu, x, y)){
+            *posx = x;
+            *posy = y;
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+}
+
+void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir, int whichplayer){ // explication : cf. /Docu/dragonDesProbas.png
+    srand(time(NULL));
+    int probaArcher = 1;
+    int probaChevalier = 1;
+    int probaDragon = 1;
+    int probaGargouille = 1;
+    int probatotal = probaArcher + probaChevalier + probaDragon + probaGargouille;
+    int randint = rand()%probatotal;
+    int* posx;
+    int* posy;
+    if (findNewUnitPlace(jeu, whichplayer, posx, posy)){
+        if(randint<probaArcher){
+            if (elixir>2){
+                creeArcher(*posx, *posy);
+            }
+        }else{
+        randint = randint - probaArcher;
+        if(randint<probaChevalier){
+            if (elixir>4){
+                creeChevalier(*posx, *posy);
+            }
+        }else{
+        randint = randint - probaChevalier;
+        if(randint<probaDragon){
+            if (elixir>3){
+                creeDragon(*posx, *posy);
+            }
+        }else{
+        randint = randint - probaDragon;
+        if(randint<probaGargouille){
+            if (elixir>1){
+                creeGargouille(*posx, *posy);
+            }
+        }
+        }
+        }
+        }
+    }
+}
+
+void createTowers(TplateauJeu jeu, TListePlayer* playerList1, TListePlayer* playerList2){
+    Tunite* Roi1 = creeTourRoi(5, 1);
+    Tunite* Roi2 = creeTourRoi(5, 17);
+    Tunite* Tour1 = creeTour(5, 3);
+    Tunite* Tour2 = creeTour(5, 15);
+    // add towers to game
+    addUnitToGame(jeu, *playerList1, Roi1);
+    addUnitToGame(jeu, *playerList1, Tour1);
+    addUnitToGame(jeu, *playerList2, Roi2);
+    addUnitToGame(jeu, *playerList2, Tour2);
+}
 
 
 Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, int atkDelay, int damage, int range, int movementSpeed, int posX, int posY, int elixirCost){
@@ -162,34 +238,49 @@ Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int M
     return nouv;
 }
 
-Tunite *creeTour(posx, posy){
+Tunite *creeTour(int posx, int posy){
     return createUnit(tour, solEtAir, sol, 500, 3, 100, 3, 0, posx, posy, 0);  // 1 s/atk -> 3 ticks
 }
-Tunite *creeTourRoi(posx, posy){
+Tunite *creeTourRoi(int posx, int posy){
     return createUnit(tourRoi, solEtAir, sol, 800, 4, 120, 4, 0, posx, posy, 0);  // 1.2 s/atk -> 4 ticks
 }
-Tunite *creeChevalier(posx, posy){
-    return createUnit(chevalier, sol, sol, 400, 5, 250, 1, 2.0, posx, posy, 4); // 1.5 s/atk -> 5 ticks
+Tunite *creeChevalier(int posx, int posy){
+    return createUnit(chevalier, sol, sol, 400, 5, 250, 1, 2, posx, posy, 4); // 1.5 s/atk -> 5 ticks
 }
-Tunite *creeArcher(posx, posy){
-    return createUnit(archer, solEtAir, sol, 80, 2, 120, 3, 1.0, posx, posy, 2);  // 0.7 s/atk -> 2 ticks
+Tunite *creeArcher(int posx, int posy){
+    return createUnit(archer, solEtAir, sol, 80, 2, 120, 3, 1, posx, posy, 2);  // 0.7 s/atk -> 2 ticks
 }
-Tunite *creeDragon(posx, posy){
-    return createUnit(dragon, solEtAir, air, 200, 4, 70, 2, 2.0, posx, posy, 3); // 1.2 s/atk -> 4 ticks
+Tunite *creeDragon(int posx, int posy){
+    return createUnit(dragon, solEtAir, air, 200, 4, 70, 2, 2, posx, posy, 3); // 1.2 s/atk -> 4 ticks
 }
-Tunite *creeGargouille(posx, posy){
-    return createUnit(gargouille, solEtAir, air, 80, 2, 90, 1, 3.0, posx, posy, 1);  // 0.6 s/atk -> 2 ticks
+Tunite *creeGargouille(int posx, int posy){
+    return createUnit(gargouille, solEtAir, air, 80, 2, 90, 1, 3, posx, posy, 1);  // 0.6 s/atk -> 2 ticks
+}
+Tunite *creeEmpty(int posx, int posy){      // Creer des 'murs', on n'ajoute pas les Empty aux listes de joueurs donc elles ne sont pas updates
+                                            // ne sont pas attaquees ou vues comme cibles, elles bloquent juste le deplacement.
+    return createUnit(Empty, sol, sol, -1, -1, -1, -1, -1, posx, posy, -1);
 }
 
-void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite unit){
-    int posX = getPosX(&unit);
-    int posY = getPosY(&unit);
-    jeu[posX][posY] = &unit;
+void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite* unit){
+    int posX = getPosX(unit);
+    int posY = getPosY(unit);
+    jeu[posX][posY] = unit;
     playerList = addLast(playerList, unit);
 }
 
 
 /****************** Updating Game ******************/
+
+void updatePlayer(TplateauJeu jeu, TListePlayer playerList, int whichPlayer, TListePlayer enemyPlayerList, int time){
+    int i, n = getNbCell(playerList);
+    TListePlayer current = playerList;
+    Tunite* unit;
+    for(i=0; i<n; i++){
+        unit = getData(current);
+        updateUnit(jeu, *unit, whichPlayer, enemyPlayerList, time);
+    }
+}
+
 
 void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enemyPlayerList, int time){
     // SI (Cible a portee && Cible vivante)
@@ -219,7 +310,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
     }else{
         getNewTarget(unit, enemyPlayerList, target);
         if (doesTargetExist){
-            if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
+            if(time%atkDelay){ // time%atkDelay vaut 0 tous les atkDelay ticks
                 hp = getHPLeft(target) - getDamage(&unit);
                 if (hp<=0){
                     enemyPlayerList = killUnit(*target, enemyPlayerList, jeu);
@@ -230,7 +321,7 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
             }
         }else{
             if(time%3){ // on bouge tt les 3 ticks, à changer si on change la vitesse des ticks obviously ;)
-                moveUnit(jeu, unit);
+                moveUnit(jeu, unit, whichPlayer);
             }
         }
     }
@@ -307,32 +398,54 @@ void moveUnitTo(TplateauJeu jeu, Tunite unit, int posX, int posY){ // type void 
     setPosY(&unit, posY);
 }
 
-void moveUnit(TplateauJeu jeu, Tunite unit){
+void moveUnit(TplateauJeu jeu, Tunite unit, int whichplayer){ // TBD : les unites volantes doivent passer au dessus de la riviere
     srand(time(NULL));
     int i, n = getMoveSpeed(&unit);
     int randint = rand()%2;
+    int randint2 = rand()%2;
     int posX = getPosX(&unit);
     int posY = getPosY(&unit);
+    int yDir = +1;
+    int xDir = +1;                  // Default = vers le haut
+    if (whichplayer==2){
+        xDir = -1;                  // Si joueur 2 : vers le bas
+    }
     for (i=0;i<n;i++){
-        if (randint){
-            if (jeu[posX+1][posY]==NULL){
-                moveUnitTo(jeu, unit, posX+1, posY);
+        if (posY<5){                // Si a gauche, direction de Y = droite
+            yDir = -1;
+        }else{
+            if (posY=5){
+                if (randint2){      // Si au milieu, direction de Y = random
+                    yDir = -1;
+                }else{
+                    yDir = +1;
+                }
             }else{
-                if (jeu[posX][posY+1]==NULL){
-                    moveUnitTo(jeu, unit, posX, posY+1);
+                if (posY>5){        // Si a droite, direction de Y = gauche
+                   yDir = +1;
+                }
+            }
+        }
+        if (randint){
+            if (jeu[posX+xDir][posY]==NULL){
+                moveUnitTo(jeu, unit, posX+xDir, posY);
+            }else{
+                if (jeu[posX][posY+yDir]==NULL){
+                    moveUnitTo(jeu, unit, posX, posY+yDir);
                 }
             }
         }else{
-            if (jeu[posX][posY+1]==NULL){
-                moveUnitTo(jeu, unit, posX, posY+1);
+            if (jeu[posX][posY+yDir]==NULL){
+                moveUnitTo(jeu, unit, posX, posY+yDir);
             }else{
-                if (jeu[posX+1][posY]==NULL){
-                    moveUnitTo(jeu, unit, posX+1, posY);
+                if (jeu[posX+xDir][posY]==NULL){
+                    moveUnitTo(jeu, unit, posX+xDir, posY);
                 }
             }
         }
     }
 }
+
 
 
 
