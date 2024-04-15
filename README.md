@@ -32,8 +32,8 @@
 
 
 Problemes typage : 
-  Tunite -> Tunite* dans les fonctions de manipulation de listes
-    notement : - addLAst
-               - ~addFirst~
-               - addAtN
-  Tlistplayer = T_List !! faire attention
+Tunite -> Tunite* dans les fonctions de manipulation de listes
+notement : - addLAst
+           - ~addFirst~
+           - addAtN
+Tlistplayer = T_List !! faire attention
