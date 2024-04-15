@@ -27,11 +27,7 @@
  - [ ] Save
  - [ ] Load
 
-
-
-
-
-Problemes typage : \n
+Problemes typage :
 Tunite -> Tunite* dans les fonctions de manipulation de listes
 notement : - addLAst
            - ~addFirst~
