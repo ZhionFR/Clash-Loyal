@@ -53,20 +53,20 @@ int main(int argc, char* argv[])
 
 
         /***************************** Variables *****************************/
+        srand(time(NULL));
         int time = 0;
-        int *player1Elixir, *player2Elixir;
-        #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-        *player1Elixir = 0;
-        *player2Elixir = 0;
-        #pragma GCC diagnostic warning "-Wmaybe-uninitialized"
+        int *player1Elixir = (int*)malloc(sizeof(int));
+        int *player2Elixir = (int*)malloc(sizeof(int));
+        *player1Elixir = 10;
+        *player2Elixir = 10;
         TListePlayer playerList1;
         TListePlayer playerList2;
-        #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
         initList(&playerList1);
         initList(&playerList2);
-        #pragma GCC diagnostic warning "-Wimplicit-function-declaration"
-        createTowers(jeu, &playerList1, &playerList2); //  BUG THIS LINE
-
+        playerList1 = addBaseTower(jeu, &playerList1, 1);
+        playerList1 = addKingTower(jeu, &playerList1, 1);
+        playerList2 = addBaseTower(jeu, &playerList2, 2);
+        playerList2 = addKingTower(jeu, &playerList2, 2);
 
         /*********************************************************************/
 
@@ -77,17 +77,38 @@ int main(int argc, char* argv[])
 
 
                 /******************************** Jeu ********************************/
+                printf("/////////////////////////////////////\n");
+                printf("tick : %i, elixirs : %i;%i\n", time, *player1Elixir, *player2Elixir);
+                printf("Player 1 :");
+                affichePlayerListConsole(playerList1);
+                printf("Player 2 :");
+                affichePlayerListConsole(playerList2);
+                affichePlateauConsole(jeu,LARGEURJEU,HAUTEURJEU);
+                printf("/////////////////////////////////////\n");
+
+                if(isKingDead(playerList1)){
+                    cont = 0;
+                    printf("'Player' 2 won !\n");
+                }
+                if(isKingDead(playerList2)){
+                    cont = 0;
+                    printf("'Player' 1 won !\n");
+                }
+
 
                 updatePlayer(jeu, playerList1, 1, playerList2, time); // Update P1
                 updatePlayer(jeu, playerList2, 2, playerList1, time); // Update P2
 
-                if (time%3){
-                    buyUnit(jeu, playerList1, player1Elixir, 1);
-                    buyUnit(jeu, playerList2, player2Elixir, 2);
+                if (!(time%20)){
+                    playerList1 = buyUnit(jeu, &playerList1, player1Elixir, 1);
+                    playerList2 = buyUnit(jeu, &playerList2, player2Elixir, 2);
+                }
+                if (!(time%10)){
+                    if (*player1Elixir<10) (*player1Elixir)++;
+                    if (*player2Elixir<10) (*player2Elixir)++;
                 }
 
                 time += 1;
-                printf("%i\n", time);
                 /*********************************************************************/
                 //affichage du jeu à chaque tour
                 efface_fenetre(pWinSurf);

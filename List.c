@@ -82,6 +82,8 @@ T_List addFirst(T_List l, Tunite* mydata){
 T_List addLast(T_List l, Tunite* mydata){
     T_List new = (T_List)malloc(sizeof(T_Cell));
     setData(new, mydata);
+    setPrevCell(new, NULL);
+    setNextCell(new, NULL);
     if (isEmptyList(l)){
         return new;
     }
@@ -139,6 +141,7 @@ T_List delFirst(T_List l){
         return NULL;
     }
     T_List new = getNextCell(l);
+    setPrevCell(new, NULL);
     free(getData(l));
     free(l);
     return new;
@@ -163,29 +166,37 @@ T_List delLast(T_List l){
     return l;
 }
 
-T_List delAtN(T_List l, int pos){
-    if (isEmptyList(l) && pos > 0) { // Limit condition
-        printf("WARNING - delAtN : Non zero Index in NULL List (deleting first)\n");
-        return NULL;
+
+// ChatGPT's function
+T_List delAtN(T_List list, int index){
+    if (isEmptyList(list)){
+        printf("ERROR - delAtN: Empty list.\n");
+        return list;
     }
-    if (pos == 0) { // Limit condition
-        return delFirst(l);
+    T_List current = list;
+    int count = 0;
+    while (current != NULL && count < index){
+        current = getNextCell(current);
+        count++;
     }
-    T_List temp = l;
-    int index = 0;
-    while (!isEmptyList(getNextCell(temp)) && index < pos){ // Traverse the list to reach the Nth cell
-        temp = getNextCell(temp);
-        index++;
+    if (current == NULL){
+        printf("ERROR - delAtN: Index out of bounds.\n");
+        return list;
     }
-    if (index < pos){ // If pos > len list
-        printf("WARNING - delAtN : Index out of Bounds (deleting last)\n");
-        return delLast(l);
+    if (count == 0){
+        if (current->next != NULL)
+            setPrevCell(current->next, NULL);
+        list = current->next;
+    } else{
+        if (current->prev != NULL)
+            setNextCell(current->prev, current->next);
+        if (current->next != NULL)
+            setPrevCell(current->next, current->prev);
     }
-    free(getData(temp));
-    free(temp);
-    *temp = *(*temp).next; // TBD demander si possible de modif
-    return l;
+    free(current);
+    return list;
 }
+
 
 /********** Others *************/
 
@@ -208,12 +219,13 @@ int getSizeBytes(T_List l){
 }
 
 T_List creatNewListeFromFusion(T_List l1, T_List l2){
-    T_Cell* new = (T_Cell*)malloc(sizeof(T_Cell));
-    new = l1;
-    while(!isEmptyList(getNextCell(new))) // Traverse the l1 list to reach the last cell
-        new = getNextCell(new);
-    setNextCell(new, l2);
-    return new;
+    if (isEmptyList(l1)) // If l1 is empty, simply return l2
+        return l2;
+
+    T_List lastCellL1 = getLastCell(l1); // Get the last cell of l1
+    setNextCell(lastCellL1, l2); // Append l2 to the end of l1
+    setPrevCell(l2, lastCellL1); // Set the previous pointer of l2 to the last cell of l1
+    return getFirstCell(l1); // Return the first cell of the merged list
 }
 
 T_List addBehind(T_List l1, T_List l2){

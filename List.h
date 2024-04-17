@@ -37,7 +37,7 @@ T_List addLast(T_List l, Tunite* mydata);
 
 T_List delFirst(T_List l);
 T_List delLast(T_List l);
-T_List delAtN(T_List l, int pos);
+T_List delAtN(T_List list, int pos);
 
 /********** Others *************/
 
@@ -50,11 +50,6 @@ T_List addBehind(T_List debut, T_List suite);
 
 T_List findCell(T_List l, int data);
 int getOccurences(T_List l, int data);
-
-/********** Printing Functions *************/
-
-void displayListV1( T_List l);
-void displayListV2( T_List l);
 
 
 // Utils

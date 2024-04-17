@@ -7,7 +7,7 @@ typedef enum{tour, tourRoi, archer, chevalier, dragon, gargouille, Empty} Tunite
 typedef enum{sol, solEtAir, air } Tcible;
 
 
-typedef struct {
+typedef struct Tunite {
     TuniteDuJeu nom;
     Tcible cibleAttaquable;	//indique la position des unités que l’on peut attaquer
     Tcible maposition;		//indique soit « air » soit « sol », utile pour savoir
@@ -17,7 +17,7 @@ typedef struct {
     int degats;
     int portee ;			//en mètre, distance sur laquelle on peut atteindre une
                             //cible
-    struct Tunite *Target;
+    struct Tunite* Target;
 
     int vitessedeplacement;	//en m/s
     int posX, posY;			//position sur le plateau de jeu

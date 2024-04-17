@@ -1,0 +1,13 @@
+[04/16 11:02:19] updatePlayer | Starting
+[04/16 11:02:19] updatePlayer | Sucessfully terminated
+[04/16 11:02:19] updatePlayer | Starting
+[04/16 11:02:19] updatePlayer | Sucessfully terminated
+[04/16 11:02:19] updatePlayer | Starting
+[04/16 11:02:19] updatePlayer | Sucessfully terminated
+[04/16 11:02:19] updatePlayer | Starting
+[04/16 11:02:19] updatePlayer | Sucessfully terminated
+[04/16 11:02:19] tryToBuyAndPlaceUnit | Starting
+[04/16 11:02:19] buyUnit | Starting
+[04/16 11:02:19] findNewUnitPlace | Starting
+[04/16 11:02:19] findNewUnitPlace | Terminated Sucessfully
+[04/16 11:02:19] buyUnit | Terminated Sucessfully

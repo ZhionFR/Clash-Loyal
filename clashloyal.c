@@ -1,10 +1,10 @@
 #include "clashloyal.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "List.h"
+#include "math.h"
 #include "type.h"
 #include <time.h>
-#pragma GCC diagnostic ignored "-Wimplicit-int"
-#pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 
 /**************** Tab alloc/display ****************/
 
@@ -38,7 +38,7 @@ void initPlateauAvecNULL(TplateauJeu jeu,int largeur, int hauteur){
 
 void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
     //pour un affichage sur la console, en relation avec enum TuniteDuJeu
-    const char* InitialeUnite[6]={"T", "R", "A", "C", "D", "G"};
+    const char* InitialeUnite[7]={"T", "R", "A", "C", "D", "G", "E"};
 
     printf("\n");
     for (int j=0;j<hauteur;j++){
@@ -51,6 +51,19 @@ void affichePlateauConsole(TplateauJeu jeu, int largeur, int hauteur){
         }
         printf("\n");
     }
+}
+
+void affichePlayerListConsole(TListePlayer playerList){
+    //pour un affichage sur la console, en relation avec enum TuniteDuJeu
+    const char* InitialeUnite[7]={"T", "R", "A", "C", "D", "G", "E"};
+
+    printf("\n[ ");
+    TListePlayer curr = playerList;
+    while(!(isEmptyList(curr))){
+        printf("%s ",InitialeUnite[getData(curr)->nom]);
+        curr = getNextCell(curr);
+    }
+    printf("]\n");
 }
 
 
@@ -89,15 +102,11 @@ int getPosY(Tunite* unit){
 int getElixirCost(Tunite* unit){
     return unit->coutEnElixir;
 }
-int getTarget(Tunite* unit, Tunite* cible){ // cible est la variable qu'on voudrati renvoyer si on etait sur d'avoir une cible,
-                                            // mais on doit renvoyer un int pour savoir si on en a une donc on passe cible en argument
-                                            // et on la modifiera lors du get tout en renvoyant 0 si elle existe et 1 sinon
+Tunite* getTarget(Tunite* unit){
     if (unit->Target==NULL){
-        cible = NULL;
-        return 1;
+        return NULL;
     }else{
-        cible = unit->Target;
-        return 0;
+        return unit->Target;
     }
 }
 
@@ -148,9 +157,9 @@ void setTarget(Tunite* unit, Tunite* cible){
 
 int isEmptySlot(TplateauJeu jeu, int posx, int posy){
     if (jeu[posx][posy]==NULL){
-        return 0;
-    }else{
         return 1;
+    }else{
+        return 0;
     }
 }
 
@@ -162,65 +171,93 @@ int findNewUnitPlace(TplateauJeu jeu, int whichplayer, int* posx, int* posy){
         if (isEmptySlot(jeu, x, y)){
             *posx = x;
             *posy = y;
-            return 0;
-        }else{
             return 1;
         }
     }
+    printf("No possible spawn location found\n");
+    return 0;
 }
 
-void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir, int whichplayer){ // explication : cf. /Docu/dragonDesProbas.png
-    srand(time(NULL));
+
+TListePlayer buyUnit(TplateauJeu jeu, TListePlayer* playerList, int* elixir, int whichplayer){ // explication : cf. /Docu/dragonDesProbas.png
+    Tunite* newUnit;
     int probaArcher = 1;
     int probaChevalier = 1;
     int probaDragon = 1;
     int probaGargouille = 1;
     int probatotal = probaArcher + probaChevalier + probaDragon + probaGargouille;
     int randint = rand()%probatotal;
-    int* posx;
-    int* posy;
-    if (findNewUnitPlace(jeu, whichplayer, posx, posy)){
+    int posx = 0;
+    int posy = 0;
+    if (findNewUnitPlace(jeu, whichplayer, &posx, &posy)){
         if(randint<probaArcher){
-            if (elixir>2){
-                creeArcher(*posx, *posy);
+            if (*elixir>2){
+                *elixir = *elixir - 2;
+                newUnit = creeArcher(posx, posy);
+                return addUnitToGame(jeu, playerList, newUnit);
+            }else{
+                return *playerList;
             }
         }else{
         randint = randint - probaArcher;
         if(randint<probaChevalier){
-            if (elixir>4){
-                creeChevalier(*posx, *posy);
+            if (*elixir>4){
+                *elixir = *elixir - 4;
+                newUnit = creeChevalier(posx, posy);
+                return addUnitToGame(jeu, playerList, newUnit);
+            }else{
+                return *playerList;
             }
         }else{
         randint = randint - probaChevalier;
         if(randint<probaDragon){
-            if (elixir>3){
-                creeDragon(*posx, *posy);
+            if (*elixir>3){
+                *elixir = *elixir - 3;
+                newUnit = creeDragon(posx, posy);
+                return addUnitToGame(jeu, playerList, newUnit);
+            }else{
+                return *playerList;
             }
         }else{
         randint = randint - probaDragon;
         if(randint<probaGargouille){
-            if (elixir>1){
-                creeGargouille(*posx, *posy);
+            if (*elixir>1){
+                *elixir = *elixir - 1;
+                newUnit = creeGargouille(posx, posy);
+                return addUnitToGame(jeu, playerList, newUnit);
+            }else{
+                return *playerList;
             }
+        }else{
+            return *playerList;
         }
         }
         }
         }
+    }else{
+        return *playerList;
     }
 }
 
-void createTowers(TplateauJeu jeu, TListePlayer* playerList1, TListePlayer* playerList2){
-    Tunite* Roi1 = creeTourRoi(5, 1);
-    Tunite* Roi2 = creeTourRoi(5, 17);
-    Tunite* Tour1 = creeTour(5, 3);
-    Tunite* Tour2 = creeTour(5, 15);
-    // add towers to game
-    addUnitToGame(jeu, *playerList1, Roi1);
-    addUnitToGame(jeu, *playerList1, Tour1);
-    addUnitToGame(jeu, *playerList2, Roi2);
-    addUnitToGame(jeu, *playerList2, Tour2);
+TListePlayer addKingTower(TplateauJeu jeu, TListePlayer* playerList, int whichplayer){
+    Tunite* kingTower;
+    int posKing = 1;
+    if(whichplayer==2){
+        posKing = 17;
+    }
+    kingTower = creeTourRoi(5, posKing);
+    return addUnitToGame(jeu, playerList, kingTower);
 }
 
+TListePlayer addBaseTower(TplateauJeu jeu, TListePlayer* playerList, int whichplayer){
+    Tunite* tower;
+    int posTower = 3;
+    if(whichplayer==2){
+        posTower = 15;
+    }
+    tower = creeTour(5, posTower);
+    return addUnitToGame(jeu, playerList, tower);
+}
 
 Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, int atkDelay, int damage, int range, int movementSpeed, int posX, int posY, int elixirCost){
     Tunite *nouv = (Tunite*)malloc(sizeof(Tunite));
@@ -261,28 +298,31 @@ Tunite *creeEmpty(int posx, int posy){      // Creer des 'murs', on n'ajoute pas
     return createUnit(Empty, sol, sol, -1, -1, -1, -1, -1, posx, posy, -1);
 }
 
-void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite* unit){
+TListePlayer addUnitToGame(TplateauJeu jeu, TListePlayer* playerList, Tunite* unit){
     int posX = getPosX(unit);
     int posY = getPosY(unit);
     jeu[posX][posY] = unit;
-    playerList = addLast(playerList, unit);
+    return addLast(*playerList, unit);
 }
 
 
 /****************** Updating Game ******************/
 
 void updatePlayer(TplateauJeu jeu, TListePlayer playerList, int whichPlayer, TListePlayer enemyPlayerList, int time){
-    int i, n = getNbCell(playerList);
     TListePlayer current = playerList;
     Tunite* unit;
-    for(i=0; i<n; i++){
+    if (isEmptyList(current)){
+        exit(1);
+    }
+    while(!(isEmptyList(current))){
         unit = getData(current);
-        updateUnit(jeu, *unit, whichPlayer, enemyPlayerList, time);
+        updateUnit(jeu, unit, whichPlayer, enemyPlayerList, time);
+        current = getNextCell(current);
     }
 }
 
 
-void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enemyPlayerList, int time){
+void updateUnit(TplateauJeu jeu, Tunite* unit, int whichPlayer, TListePlayer enemyPlayerList, int time){
     // SI (Cible a portee && Cible vivante)
     //      SI (il est temps d'attaquer)
     //          Attaquer(Cible)
@@ -293,34 +333,35 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
     // SINON
     //      SI (il est temps de bouger)
     //          Deplacer Unite
-    Tunite* target = NULL;
     int hp;
-    int atkDelay = getAttackDelay(&unit);
-    int doesTargetExist = getTarget(&unit, target);
-    if (doesTargetExist){
-        if(time%atkDelay){ // time%atkDelay = 0 tous les atkDelay ticks
-            hp = getHPLeft(target) - getDamage(&unit);
+    int atkDelay = getAttackDelay(unit);
+    Tunite* target = NULL;
+    target = getIfTarget(unit, target);
+    if (target!=NULL){
+            if(!(time%atkDelay)){ // time%atkDelay = 0 tous les atkDelay ticks
+            hp = ((getHPLeft(target)) - (getDamage(unit)));
             if (hp<=0){
-                enemyPlayerList = killUnit(*target, enemyPlayerList, jeu);
+                enemyPlayerList = killUnit(target, enemyPlayerList, jeu);
                 target = NULL;
             }else {
                 setHPLeft(target, hp);
             }
         }
     }else{
-        getNewTarget(unit, enemyPlayerList, target);
-        if (doesTargetExist){
+        target = getNewTarget(unit, enemyPlayerList, target);
+        if (target!=NULL){
             if(time%atkDelay){ // time%atkDelay vaut 0 tous les atkDelay ticks
-                hp = getHPLeft(target) - getDamage(&unit);
+                hp = getHPLeft(target);
+                hp = ((getHPLeft(target)) - (getDamage(unit)));
                 if (hp<=0){
-                    enemyPlayerList = killUnit(*target, enemyPlayerList, jeu);
+                    enemyPlayerList = killUnit(target, enemyPlayerList, jeu);
                     target = NULL;
                 }else {
                     setHPLeft(target, hp);
                 }
             }
         }else{
-            if(time%3){ // on bouge tt les 3 ticks, à changer si on change la vitesse des ticks obviously ;)
+            if(!(time%3)){ // on bouge tt les 3 ticks, à changer si on change la vitesse des ticks obviously ;)
                 moveUnit(jeu, unit, whichPlayer);
             }
         }
@@ -329,100 +370,123 @@ void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enem
 
 /*************** GetNewTarget ***************/
 int dist(int Xa, int Ya, int Xb, int Yb){
-    int d = (Xa-Xb)*(Xa-Xb)+(Ya-Xb)*(Ya-Xb);
+    int d = (Xa-Xb)*(Xa-Xb)+(Ya-Yb)*(Ya-Yb);
     return sqrt(d);
 }
 
-void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target){
+Tunite* getIfTarget(Tunite* unit, Tunite* target){
+    if (target == NULL) {
+        return NULL;
+    }
+    int posX = getPosX(unit);
+    int posY = getPosY(unit);
+    int tposX = getPosX(target);
+    int tposY = getPosY(target);
+    int d = dist(posX, posY, tposX, tposY);
+    if (d < getRange(unit) && getHPLeft(target) > 0) {
+        return target;
+    } else {
+        return NULL;
+    }
+}
+
+
+Tunite* getNewTarget(Tunite* unit, TListePlayer enemyPlayer, Tunite* target){
     int i = 0, n = getNbCell(enemyPlayer);
-    TListePlayer current;
+    TListePlayer current = enemyPlayer;
     int posX, posY, CposX, CposY, maxRange, d;
-    posX = getPosX(&unit);
-    posY = getPosY(&unit);
-    maxRange = getRange(&unit);
-    int loop = 0;
+    posX = getPosX(unit);
+    posY = getPosY(unit);
+    maxRange = getRange(unit);
+    int loop = 1;
     while(loop){
+        if (isEmptyList(current)){
+            return NULL;
+        }
+        CposX = getPosX(getData(current));
+        CposY = getPosY(getData(current));
         d = dist(posX, posY, CposX, CposY);
-        if (dist<maxRange){
-            target = getData(current);
-            loop = 1;
+        if (d<=maxRange){
+            return getData(current);
         }else{
-            if(i>n){
-                target = NULL;
-                loop = 1;
+            if(i>=n){
+                return NULL;
             }else{
                 current = getNextCell(current);
                 i++;
             }
         }
     }
+    return NULL;
 }
 
 /***************** KillUnit *****************/
 
-int findUnitIndex(TListePlayer playerList, int posX, int posY){ // exeption non geree car on cherche normalement une unite qui est dans la liste
+int findUnitIndex(TListePlayer playerList, int posX, int posY){
     TListePlayer current = playerList;
-    int loop = 0;
     int i = 0;
-    Tunite* unit;
-    while (loop){
-        unit = getData(current);
-        if (posX==getPosX(unit)){
-            if (posY==getPosY(unit)){
-                return i;
-            }
-        }else{
-            current = getNextCell(current);
-            i++;
+    while (current != NULL) {
+        Tunite* unit = getData(current);
+        if (posX == getPosX(unit) && posY == getPosY(unit)) {
+            return i;
         }
+        current = getNextCell(current);
+        i++;
     }
+    return -1;
 }
 
-TListePlayer killUnit(Tunite unit, TListePlayer playerList, TplateauJeu jeu){
-    int posX = getPosX(&unit);
-    int posY = getPosY(&unit);
+TListePlayer killUnit(Tunite* unit, TListePlayer playerList, TplateauJeu jeu){
+    int posX = getPosX(unit);
+    int posY = getPosY(unit);
     int ind;
     ind = findUnitIndex(playerList, posX, posY);
+    if (ind==-1){
+        return playerList;
+    }
     playerList = delAtN(playerList, ind);
     jeu[posX][posY] = NULL;
+    return playerList;
 }
 
 /***************** MoveUnit *****************/
 
-void moveUnitTo(TplateauJeu jeu, Tunite unit, int posX, int posY){ // type void -> int to add verif if split flying/not
-    int prevPosX = getPosX(&unit);
-    int prevPosY = getPosY(&unit);
+void moveUnitTo(TplateauJeu jeu, Tunite* unit, int posX, int posY){ // type void -> int to add verif if split flying/not
+    int prevPosX = getPosX(unit);
+    int prevPosY = getPosY(unit);
     jeu[prevPosX][prevPosY] = NULL;
-    jeu[posX][posY] = &unit;
-    setPosX(&unit, posX);
-    setPosY(&unit, posY);
+    jeu[posX][posY] = unit;
+    setPosX(unit, posX);
+    setPosY(unit, posY);
 }
 
-void moveUnit(TplateauJeu jeu, Tunite unit, int whichplayer){ // TBD : les unites volantes doivent passer au dessus de la riviere
-    srand(time(NULL));
-    int i, n = getMoveSpeed(&unit);
+void moveUnit(TplateauJeu jeu, Tunite* unit, int whichplayer){ // TBD : les unites volantes doivent passer au dessus de la riviere
+    int i, n = getMoveSpeed(unit);
+    if (n==0){
+        return;
+    }
     int randint = rand()%2;
     int randint2 = rand()%2;
-    int posX = getPosX(&unit);
-    int posY = getPosY(&unit);
+    int posX = getPosX(unit);
+    int posY = getPosY(unit);
     int yDir = +1;
     int xDir = +1;                  // Default = vers le haut
     if (whichplayer==2){
-        xDir = -1;                  // Si joueur 2 : vers le bas
+        yDir = -1;                  // Si joueur 2 : vers le bas
     }
     for (i=0;i<n;i++){
-        if (posY<5){                // Si a gauche, direction de Y = droite
-            yDir = -1;
+        if (posX>5){                // Si a gauche, direction de X = droite
+            xDir = -1;
         }else{
-            if (posY=5){
-                if (randint2){      // Si au milieu, direction de Y = random
-                    yDir = -1;
+            if (posX==5){
+                if (randint2){      // Si au milieu, direction de X = random
+                    xDir = -1;
                 }else{
-                    yDir = +1;
+                    xDir = +1;
                 }
             }else{
-                if (posY>5){        // Si a droite, direction de Y = gauche
-                   yDir = +1;
+                if (posX<5){        // Si a droite, direction de X = gauche
+                   xDir = +1;
                 }
             }
         }
@@ -446,21 +510,19 @@ void moveUnit(TplateauJeu jeu, Tunite unit, int whichplayer){ // TBD : les unite
     }
 }
 
+/****************** THE END ******************/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int isKingDead(T_List l){
+    if (isEmptyList(l)){
+        return 0;
+    }
+    Tunite* firstUnit = getData(l);
+    if (getUnitName(firstUnit) == tourRoi){
+        return 1;
+    }else{
+        return 0;
+    }
+}
 
 
 

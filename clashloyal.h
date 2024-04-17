@@ -25,7 +25,7 @@ int getMoveSpeed(Tunite* unit);
 int getPosX(Tunite* unit);
 int getPosY(Tunite* unit);
 int getElixirCost(Tunite* unit);
-int getTarget(Tunite* unit, Tunite* cible);
+Tunite* getTarget(Tunite* unit);
 
 /****************** Set functions ******************/
 
@@ -46,9 +46,10 @@ void setTarget(Tunite* unit, Tunite* cible);
 
 int isEmptySlot(TplateauJeu jeu, int posx, int posy);
 int findNewUnitPlace(TplateauJeu jeu, int whichplayer, int* posx, int* posy);
-void buyUnit(TplateauJeu jeu, TListePlayer playerList, int elixir, int whichplayer);
+TListePlayer buyUnit(TplateauJeu jeu, TListePlayer* playerList, int* elixir, int whichplayer);
 
-void createTowers(TplateauJeu jeu, TListePlayer* playerList1, TListePlayer* playerList2);
+TListePlayer addKingTower(TplateauJeu jeu, TListePlayer* playerList, int whichplayer);
+TListePlayer addBaseTower(TplateauJeu jeu, TListePlayer* playerList, int whichplayer);
 
 Tunite *createUnit(TuniteDuJeu name, Tcible target, Tcible targetCategory, int MaxHP, int atkDelay, int damage, int range, int movementSpeed, int posX, int posY, int elixirCost);
 
@@ -61,20 +62,28 @@ Tunite *creeGargouille(int posx, int posy);
 Tunite *creeEmpty(int posx, int posy);
 
 
-void addUnitToGame(TplateauJeu jeu, TListePlayer playerList, Tunite* unit);
+TListePlayer addUnitToGame(TplateauJeu jeu, TListePlayer* playerList, Tunite* unit);
 
 /****************** Updating Game ******************/
 
-void updateUnit(TplateauJeu jeu, Tunite unit, int whichPlayer, TListePlayer enemyPlayerList, int time);
+void updatePlayer(TplateauJeu jeu, TListePlayer playerList, int whichPlayer, TListePlayer enemyPlayerList, int time);
+void updateUnit(TplateauJeu jeu, Tunite* unit, int whichPlayer, TListePlayer enemyPlayerList, int time);
 
 /*************** GetNewTarget ***************/
 int dist(int Xa, int Ya, int Xb, int Yb);
-void getNewTarget(Tunite unit, TListePlayer enemyPlayer, Tunite* target);
+Tunite* getIfTarget(Tunite* unit, Tunite* target);
+Tunite* getNewTarget(Tunite* unit, TListePlayer enemyPlayer, Tunite* target);
 
-TListePlayer killUnit(Tunite unit, TListePlayer playerList, TplateauJeu jeu);
+/***************** KillUnit *****************/
 
-void moveUnit(TplateauJeu jeu, Tunite unit, int whichplayer);
+TListePlayer killUnit(Tunite* unit, TListePlayer playerList, TplateauJeu jeu);
 
+/***************** MoveUnit *****************/
 
+void moveUnit(TplateauJeu jeu, Tunite* unit, int whichplayer);
+
+/****************** THE END ******************/
+
+int isKingDead(T_List l);
 
 #endif // JEU2048_H_INCLUDED
