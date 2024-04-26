@@ -335,6 +335,7 @@ void updateUnit(TplateauJeu jeu, Tunite* unit, int whichPlayer, TListePlayer ene
     //          Deplacer Unite
     int hp;
     int atkDelay = getAttackDelay(unit);
+    int moveSpeed = getMoveSpeed(unit);
     Tunite* target = NULL;
     target = getIfTarget(unit, target);
     if (target!=NULL){
@@ -361,7 +362,7 @@ void updateUnit(TplateauJeu jeu, Tunite* unit, int whichPlayer, TListePlayer ene
                 }
             }
         }else{
-            if(!(time%3)){ // on bouge tt les 3 ticks, à changer si on change la vitesse des ticks obviously ;)
+            if(!(time%(3))){
                 moveUnit(jeu, unit, whichPlayer);
             }
         }
@@ -459,6 +460,7 @@ void moveUnitTo(TplateauJeu jeu, Tunite* unit, int posX, int posY){ // type void
     setPosX(unit, posX);
     setPosY(unit, posY);
 }
+
 
 void moveUnit(TplateauJeu jeu, Tunite* unit, int whichplayer){ // TBD : les unites volantes doivent passer au dessus de la riviere
     int i, n = getMoveSpeed(unit);

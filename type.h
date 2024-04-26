@@ -19,7 +19,7 @@ typedef struct Tunite {
                             //cible
     struct Tunite* Target;
 
-    int vitessedeplacement;	//en m/s
+    int vitessedeplacement;
     int posX, posY;			//position sur le plateau de jeu
 
     int coutEnElixir;

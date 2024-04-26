@@ -401,7 +401,7 @@
 	"maSDL.h"
 	"clashloyal.h"
 
-1713346698 source:c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.c
+1714158544 source:c:\users\tommi\onedrive\documents\github\clash-loyal\clashloyal.c
 	"clashloyal.h"
 	<stdio.h>
 	<stdlib.h>
@@ -792,13 +792,14 @@
 	"type.h"
 	<stdbool.h>
 
-1713346828 source:c:\users\tommi\onedrive\documents\github\clash-loyal\main.c
+1714160094 source:c:\users\tommi\onedrive\documents\github\clash-loyal\main.c
 	"SDL.h"
 	"maSDL.h"
 	"clashloyal.h"
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
+	"save.h"
 
 1710868552 c:\users\tommi\onedrive\documents\github\clash-loyal\masdl.h
 	"clashloyal.h"
@@ -1647,6 +1648,16 @@
 	"list.h"
 	"type.h"
 
-1713191040 c:\users\tommi\onedrive\documents\github\clash-loyal\type.h
+1714112373 c:\users\tommi\onedrive\documents\github\clash-loyal\type.h
+	"type.h"
+
+1714159778 c:\users\tommi\onedrive\documents\github\clash-loyal\save.h
+	"type.h"
+
+1714161145 source:c:\users\tommi\onedrive\documents\github\clash-loyal\save.c
+	<stdio.h>
+	<stdlib.h>
+	"save.h"
+	"clashloyal.h"
 	"type.h"
 

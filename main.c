@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include "save.h"
 
 
 /*--------- Main ---------------------*/
@@ -118,11 +118,12 @@ int main(int argc, char* argv[])
 
                 //LECTURE DE CERTAINES TOUCHES POUR LANCER LES RESTAURATIONS ET SAUVEGARDES
                 const Uint8* pKeyStates = SDL_GetKeyboardState(NULL);
-                if ( pKeyStates[SDL_SCANCODE_V] ){
+                if ( pKeyStates[SDL_SCANCODE_V] || pKeyStates[SDL_SCANCODE_C] ){
                         /* Ajouter vos appels de fonctions ci-dessous qd le joueur appuye sur D */
 
                         // APPELEZ ICI VOTRE FONCTION DE SAUVEGARDE/RESTAURATION DEMANDEE
-                        message("Sauvegarde","Placer ici votre fonction de restauration/sauvegarde");
+                        saveSeq(playerList1, playerList2);
+                        saveBin(playerList1, playerList2);
 
                         //Ne pas modifiez les 4 lignes ci-dessous
                         efface_fenetre(pWinSurf);
@@ -130,35 +131,12 @@ int main(int argc, char* argv[])
                         maj_fenetre(pWindow);
                         SDL_Delay(300);
                 }
-                if ( pKeyStates[SDL_SCANCODE_C] ){
-                        /* Ajouter vos appels de fonctions ci-dessous qd le joueur appuye sur C */
-
-                        // APPELEZ ICI VOTRE FONCTION DE SAUVEGARDE/RESTAURATION DEMANDEE
-                        message("Sauvegarde","Placer ici votre fonction de restauration/sauvegarde");
-
-                        //Ne pas modifiez les 4 lignes ci-dessous
-                        efface_fenetre(pWinSurf);
-                        prepareAllSpriteDuJeu(jeu,LARGEURJEU,HAUTEURJEU,TabSprite,pWinSurf);
-                        maj_fenetre(pWindow);
-                        SDL_Delay(300);
-                }
-                if ( pKeyStates[SDL_SCANCODE_D] ){
+                if ( pKeyStates[SDL_SCANCODE_D] || pKeyStates[SDL_SCANCODE_S] ){
                         /* Ajouter vos appels de fonctions ci-dessous qd le joueur appuye sur D */
 
                         // APPELEZ ICI VOTRE FONCTION DE SAUVEGARDE/RESTAURATION DEMANDEE
-                        message("Sauvegarde","Placer ici votre fonction de restauration/sauvegarde");
-
-                        //Ne pas modifiez les 4 lignes ci-dessous
-                        efface_fenetre(pWinSurf);
-                        prepareAllSpriteDuJeu(jeu,LARGEURJEU,HAUTEURJEU,TabSprite,pWinSurf);
-                        maj_fenetre(pWindow);
-                        SDL_Delay(300);
-                }
-                if ( pKeyStates[SDL_SCANCODE_S] ){
-                        /* Ajouter vos appels de fonctions ci-dessous qd le joueur appyue sur S */
-
-                        // APPELEZ ICI VOTRE FONCTION DE SAUVEGARDE/RESTAURATION DEMANDEE
-                        message("Sauvegarde","Placer ici votre fonction de restauration/sauvegarde");
+                        loadSeq(&playerList1, &playerList2);
+                        loadBin(&playerList1, &playerList2);
 
                         //Ne pas modifiez les 4 lignes ci-dessous
                         efface_fenetre(pWinSurf);
